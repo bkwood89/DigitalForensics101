@@ -257,5 +257,12 @@ namespace ForensicCollection
             form2 = null;
             Show();
         }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            Form3 listener = new Form3();
+            listener.Show();
+            Hide();
+        }
     }
 }

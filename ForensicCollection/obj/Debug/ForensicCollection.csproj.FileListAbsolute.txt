@@ -8,3 +8,14 @@ c:\users\wes\documents\visual studio 2015\Projects\ForensicCollection\ForensicCo
 c:\users\wes\documents\visual studio 2015\Projects\ForensicCollection\ForensicCollection\obj\Debug\ForensicCollection.exe
 c:\users\wes\documents\visual studio 2015\Projects\ForensicCollection\ForensicCollection\obj\Debug\ForensicCollection.pdb
 C:\Users\Wes\Documents\Visual Studio 2015\Projects\ForensicCollection\ForensicCollection\obj\Debug\ForensicCollection.Form2.resources
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\bin\Debug\ForensicCollection.exe.config
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.exe
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.pdb
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\bin\Debug\ForensicCollection.exe
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\bin\Debug\ForensicCollection.pdb
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.csprojResolveAssemblyReference.cache
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.Form1.resources
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.Form2.resources
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.Form3.resources
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.Properties.Resources.resources
+C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.csproj.GenerateResource.Cache

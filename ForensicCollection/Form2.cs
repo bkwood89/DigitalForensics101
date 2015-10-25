@@ -372,6 +372,8 @@ namespace ForensicCollection
 
         private void Cancel_Click(object sender, EventArgs e)
         {
+            //Form1 main = new Form1();
+            //main.Show();
             Hide();
         }
     }
