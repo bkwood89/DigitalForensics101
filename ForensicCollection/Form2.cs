@@ -79,6 +79,8 @@ namespace ForensicCollection
                 }
                 phasecomplete.Visible = true;
                 finishText.Visible = true;
+                filename.Text = "Setup Complete!";
+                filename.Refresh();
             }
         }
         private bool FileExistCheck()
