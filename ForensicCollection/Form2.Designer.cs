@@ -45,6 +45,7 @@
             this.keepFiles = new System.Windows.Forms.CheckBox();
             this.filename = new System.Windows.Forms.Label();
             this.finishText = new System.Windows.Forms.Label();
+            this.netcat = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Title
@@ -219,11 +220,21 @@
             this.finishText.Text = "Find the extract tools in the \"RawTools\" Folder.";
             this.finishText.Visible = false;
             // 
+            // netcat
+            // 
+            this.netcat.AutoSize = true;
+            this.netcat.Location = new System.Drawing.Point(10, 129);
+            this.netcat.Name = "netcat";
+            this.netcat.Size = new System.Drawing.Size(40, 13);
+            this.netcat.TabIndex = 23;
+            this.netcat.Text = "NetCat";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(531, 257);
+            this.Controls.Add(this.netcat);
             this.Controls.Add(this.finishText);
             this.Controls.Add(this.filename);
             this.Controls.Add(this.keepFiles);
@@ -267,5 +278,6 @@
         private System.Windows.Forms.CheckBox keepFiles;
         private System.Windows.Forms.Label filename;
         private System.Windows.Forms.Label finishText;
+        private System.Windows.Forms.Label netcat;
     }
 }

@@ -56,6 +56,8 @@
             this.sha1sum = new System.Windows.Forms.CheckBox();
             this.toolsButton = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.sendIPLabel = new System.Windows.Forms.Label();
+            this.ipTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // titleText
@@ -71,7 +73,7 @@
             // captureButton
             // 
             this.captureButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.captureButton.Location = new System.Drawing.Point(370, 298);
+            this.captureButton.Location = new System.Drawing.Point(370, 322);
             this.captureButton.Name = "captureButton";
             this.captureButton.Size = new System.Drawing.Size(168, 40);
             this.captureButton.TabIndex = 1;
@@ -136,7 +138,7 @@
             // 
             this.warningText.AutoSize = true;
             this.warningText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.warningText.Location = new System.Drawing.Point(9, 279);
+            this.warningText.Location = new System.Drawing.Point(12, 276);
             this.warningText.Name = "warningText";
             this.warningText.Size = new System.Drawing.Size(174, 13);
             this.warningText.TabIndex = 7;
@@ -145,7 +147,7 @@
             // portText
             // 
             this.portText.AutoSize = true;
-            this.portText.Location = new System.Drawing.Point(46, 245);
+            this.portText.Location = new System.Drawing.Point(46, 248);
             this.portText.Name = "portText";
             this.portText.Size = new System.Drawing.Size(100, 13);
             this.portText.TabIndex = 8;
@@ -348,7 +350,7 @@
             this.sha1sum.AutoSize = true;
             this.sha1sum.Checked = true;
             this.sha1sum.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.sha1sum.Location = new System.Drawing.Point(324, 275);
+            this.sha1sum.Location = new System.Drawing.Point(414, 299);
             this.sha1sum.Name = "sha1sum";
             this.sha1sum.Size = new System.Drawing.Size(124, 17);
             this.sha1sum.TabIndex = 27;
@@ -358,7 +360,7 @@
             // toolsButton
             // 
             this.toolsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toolsButton.Location = new System.Drawing.Point(209, 298);
+            this.toolsButton.Location = new System.Drawing.Point(209, 322);
             this.toolsButton.Name = "toolsButton";
             this.toolsButton.Size = new System.Drawing.Size(155, 40);
             this.toolsButton.TabIndex = 28;
@@ -369,19 +371,39 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(12, 298);
+            this.button1.Location = new System.Drawing.Point(12, 322);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 40);
             this.button1.TabIndex = 29;
-            this.button1.Text = "Start Listener";
+            this.button1.Text = "Setup Listener";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // sendIPLabel
+            // 
+            this.sendIPLabel.AutoSize = true;
+            this.sendIPLabel.Location = new System.Drawing.Point(55, 272);
+            this.sendIPLabel.Name = "sendIPLabel";
+            this.sendIPLabel.Size = new System.Drawing.Size(91, 13);
+            this.sendIPLabel.TabIndex = 30;
+            this.sendIPLabel.Text = "Send Through IP:";
+            this.sendIPLabel.Visible = false;
+            // 
+            // ipTextBox
+            // 
+            this.ipTextBox.Location = new System.Drawing.Point(152, 269);
+            this.ipTextBox.Name = "ipTextBox";
+            this.ipTextBox.Size = new System.Drawing.Size(100, 20);
+            this.ipTextBox.TabIndex = 31;
+            this.ipTextBox.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 350);
+            this.ClientSize = new System.Drawing.Size(550, 374);
+            this.Controls.Add(this.ipTextBox);
+            this.Controls.Add(this.sendIPLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.toolsButton);
             this.Controls.Add(this.sha1sum);
@@ -447,6 +469,8 @@
         private System.Windows.Forms.CheckBox sha1sum;
         private System.Windows.Forms.Button toolsButton;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label sendIPLabel;
+        private System.Windows.Forms.TextBox ipTextBox;
     }
 }
 

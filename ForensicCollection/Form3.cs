@@ -33,9 +33,28 @@ namespace ForensicCollection
             update.Text = "Starting NetCat Listener...";
             update.Refresh();
             string command = "nc -L -v -p " + portTextBox.Text + " > allOutput.txt";
-            runCommand(command, toolsRoot + "/NetCat/");
-            update.Text = "Connection Closed. View your output in the 'Evidence' Folder.";
-            update.Refresh();
+            if (portTextBox.Text != "" && portTextBox.Text != null)
+            {
+                if (File.Exists(toolsRoot + "/NetCat/nc.exe"))
+                {
+                    runCommand(command, toolsRoot + "/NetCat/");
+                    update.Text = "Connection Closed. View your output in the 'Evidence' Folder.";
+                    update.Refresh();
+                }
+                else
+                {
+                    update.Visible = false;
+                    update.Refresh();
+                    MessageBox.Show("Missing 'nc.exe'(NetCat) from 'RawTools'. Go to 'Get Tools' and download it.");
+                }
+            }
+            else
+            {
+                update.Visible = false;
+                update.Refresh();
+                MessageBox.Show("You did not put a number in the text box.");
+            }
+            
         }
         private void runCommand(string commandToExecute, string dirToExecute)
         {

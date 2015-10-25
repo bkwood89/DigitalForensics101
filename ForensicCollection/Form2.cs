@@ -167,7 +167,17 @@ namespace ForensicCollection
                 sysinternals.Text += "Done.";
                 sysinternals.Refresh();
             }
-            sw.Stop();
+            if (File.Exists(Directory.GetCurrentDirectory() + "/downloadedFile/netcat-win32-1.12.zip") == false)
+            {
+                filename.Text = "Downloading Netcat...";
+                filename.Refresh();
+                netcat.Text += "Downloading.";
+                netcat.Refresh();
+                DownloadFile("https://eternallybored.org/misc/netcat/netcat-win32-1.12.zip", downloadFolder + "/netcat-win32-1.12.zip");
+                netcat.Text += "Done.";
+                netcat.Refresh();
+            }
+                sw.Stop();
         }
         private void ExtractAllFiles()
         {
@@ -175,6 +185,7 @@ namespace ForensicCollection
             bool oemFolderExists = Directory.Exists(rawToolsDirectory + "/OEM");
             bool sysInternalsFolderExists = Directory.Exists(rawToolsDirectory + "/SysInternals");
             bool unixUtilsFolderExists = Directory.Exists(rawToolsDirectory + "/UnixUtils");
+            bool netcatFolderExists = Directory.Exists(rawToolsDirectory + "/NetCat");
 
             if (rawToolsFolderExists == false)
             {
@@ -191,6 +202,10 @@ namespace ForensicCollection
             if (unixUtilsFolderExists == false)
             {
                 Directory.CreateDirectory(rawToolsDirectory + "/UnixUtils");
+            }
+            if (netcatFolderExists == false)
+            {
+                Directory.CreateDirectory(rawToolsDirectory + "/NetCat");
             }
             filename.Text = "Extracting Files and Setting Up Enviornment...";
             fport.Text += "..Extracting";
@@ -212,6 +227,10 @@ namespace ForensicCollection
             unixutils.Text = "Unix Utilities..Extracting";
             unixutils.Refresh();
             ZipFile.ExtractToDirectory(downloadFolder + "/UnxUtils.zip", rawToolsDirectory + "/UnixUtils/");
+
+            netcat.Text = "NetCat...Extracting";
+            netcat.Refresh();
+            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/NetCat/");
         }
         private void MoveAllFiles()
         {
@@ -242,7 +261,6 @@ namespace ForensicCollection
                 {
                     File.Delete(rawToolsDirectory + "/NTLast.exe");
                 }
-                //File.Move(downloadFolder + "/Fport-2.0/Fport.exe", rawToolsDirectory + "/Fport.exe");
                 File.Move(downloadFolder + "/NTLast.exe", rawToolsDirectory + "/NTLast.exe");
             }
             catch(Exception ex)
@@ -302,6 +320,9 @@ namespace ForensicCollection
             //}
             unixutils.Text += "Done.";
             unixutils.Refresh();
+
+            netcat.Text += ".Done.";
+            netcat.Refresh();
         }
         private void cleanDownloadsFolder()
         {
@@ -372,8 +393,6 @@ namespace ForensicCollection
 
         private void Cancel_Click(object sender, EventArgs e)
         {
-            //Form1 main = new Form1();
-            //main.Show();
             Hide();
         }
     }

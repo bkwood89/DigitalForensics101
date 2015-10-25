@@ -31,6 +31,19 @@ namespace ForensicCollection
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (saveOption == "Netcat Session")
+            {
+                if(portTextBox.Text == null || portTextBox.Text == "")
+                {
+                    MessageBox.Show("Missing Port Number.");
+                    return;
+                }
+                if(ipTextBox.Text == null || ipTextBox.Text == "")
+                {
+                    MessageBox.Show("Missing IP address to send to.");
+                    return;
+                }
+            }
             string netcat = "" + portTextBox.Text;
             output.Text = "";
             warningText.Text = "";
@@ -241,11 +254,16 @@ namespace ForensicCollection
                 portText.Text = "Send Through Port:";
                 portText.Visible =  true;
                 portTextBox.Visible = true;
+                sendIPLabel.Visible = true;
+                ipTextBox.Visible = true;
             }
             else if (saveOption == "Local")
             {
                 portText.Text = "This will save everything in the 'Evidence' Folder. ";
                 portText.Visible = true;
+                portTextBox.Visible = false;
+                sendIPLabel.Visible = false;
+                ipTextBox.Visible = false;
             }
         }
 

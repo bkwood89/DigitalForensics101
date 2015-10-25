@@ -42,6 +42,8 @@
             this.update = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.portTextBox = new System.Windows.Forms.TextBox();
+            this.seperatecommands = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // title
@@ -81,10 +83,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(26, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(468, 15);
+            this.label2.Size = new System.Drawing.Size(132, 15);
             this.label2.TabIndex = 3;
-            this.label2.Text = "1. Click \"Start Listener\",  If Netcat is not downloaded it will give you the opti" +
-    "on to do so.";
+            this.label2.Text = "1. Click \"Start Listener\".";
             // 
             // label3
             // 
@@ -169,6 +170,7 @@
             this.update.Size = new System.Drawing.Size(132, 16);
             this.update.TabIndex = 11;
             this.update.Text = "Starting Listener...";
+            this.update.Visible = false;
             // 
             // label8
             // 
@@ -187,11 +189,37 @@
             this.portTextBox.Size = new System.Drawing.Size(100, 20);
             this.portTextBox.TabIndex = 13;
             // 
+            // seperatecommands
+            // 
+            this.seperatecommands.AutoSize = true;
+            this.seperatecommands.Checked = true;
+            this.seperatecommands.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.seperatecommands.Location = new System.Drawing.Point(356, 226);
+            this.seperatecommands.Name = "seperatecommands";
+            this.seperatecommands.Size = new System.Drawing.Size(124, 17);
+            this.seperatecommands.TabIndex = 14;
+            this.seperatecommands.Text = "Seperate Commands";
+            this.seperatecommands.UseVisualStyleBackColor = true;
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Checked = true;
+            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBox1.Location = new System.Drawing.Point(356, 249);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(124, 17);
+            this.checkBox1.TabIndex = 15;
+            this.checkBox1.Text = "Sha1 All Output Files";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // Form3
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(523, 328);
+            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.seperatecommands);
             this.Controls.Add(this.portTextBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.update);
@@ -229,5 +257,7 @@
         private System.Windows.Forms.Label update;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox portTextBox;
+        private System.Windows.Forms.CheckBox seperatecommands;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
