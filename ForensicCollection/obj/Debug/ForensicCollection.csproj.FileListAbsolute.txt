@@ -19,3 +19,14 @@ C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicColl
 C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.Form3.resources
 C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.Properties.Resources.resources
 C:\Users\Wes\Documents\Visual Studio 2015\Projects\DigitalForensics\ForensicCollection\obj\Debug\ForensicCollection.csproj.GenerateResource.Cache
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\bin\Debug\ForensicCollection.exe.config
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.exe
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.pdb
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\bin\Debug\ForensicCollection.exe
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\bin\Debug\ForensicCollection.pdb
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.csprojResolveAssemblyReference.cache
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.Form1.resources
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.Form2.resources
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.Form3.resources
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.Properties.Resources.resources
+C:\Users\Kaiser\Desktop\DigitalForensics\DigitalForensics101-master\DigitalForensics101-master\ForensicCollection\obj\Debug\ForensicCollection.csproj.GenerateResource.Cache

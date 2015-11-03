@@ -232,7 +232,11 @@ namespace ForensicCollection
 
             netcat.Text = "NetCat...Extracting";
             netcat.Refresh();
+            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory);
             ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/NetCat/");
+            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/OEM/userdump/");
+            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/SysInternals/");
+            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/UnixUtils/usr/local/wbin/");
         }
         private void MoveAllFiles()
         {

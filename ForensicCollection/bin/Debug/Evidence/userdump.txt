@@ -1,0 +1,133 @@
+--BEGIN 
+User Mode Process Dumper (Version 3.0)
+
+Copyright (c) 1999 Microsoft Corp. All rights reserved.
+
+
+
+   0 System Idle Process
+   4 System
+ 444 smss.exe
+ 592 csrss.exe
+ 684 wininit.exe
+ 692 csrss.exe
+ 732 services.exe
+ 740 lsass.exe
+ 784 winlogon.exe
+ 856 svchost.exe
+ 900 svchost.exe
+1012 dwm.exe
+ 384 svchost.exe
+ 372 svchost.exe
+ 476 svchost.exe
+1120 atiesrxx.exe
+1152 WUDFHost.exe
+1184 svchost.exe
+1192 svchost.exe
+1256 svchost.exe
+1628 WUDFHost.exe
+1820 svchost.exe
+1596 vpnagent.exe
+ 984 dasHost.exe
+2072 AvastSvc.exe
+2264 spoolsv.exe
+2452 svchost.exe
+2460 HeciServer.exe
+2468 IPROSetMonitor.exe
+2476 id_service.exe
+2484 SkypeC2CAutoUpdateSvc.exe
+2496 SkypeC2CPNRSvc.exe
+2504 FastBootService.exe
+2512 MSI_LiveUpdate_Service.exe
+2588 ChargeService.exe
+2632 svchost.exe
+2648 PnkBstrA.exe
+2692 svchost.exe
+2740 vmware-authd.exe
+2748 vmnetdhcp.exe
+2768 vmnat.exe
+2776 vmware-usbarbitrator64.exe
+2928 RemoteServerWin.exe
+1896 atieclxx.exe
+3828 jhi_service.exe
+3680 GoogleCrashHandler.exe
+4604 GoogleCrashHandler64.exe
+2032 SearchIndexer.exe
+5068 WmiPrvSE.exe
+1392 sihost.exe
+   8 taskhostw.exe
+1636 explorer.exe
+5392 svchost.exe
+5424 RuntimeBroker.exe
+5736 ShellExperienceHost.exe
+5196 svchost.exe
+5520 SpeechRuntime.exe
+6776 chrome.exe
+5904 chrome.exe
+3040 chrome.exe
+2448 chrome.exe
+4972 chrome.exe
+6692 chrome.exe
+6892 chrome.exe
+6944 chrome.exe
+6920 chrome.exe
+6912 chrome.exe
+6992 chrome.exe
+7024 chrome.exe
+5504 chrome.exe
+1400 chrome.exe
+3952 chrome.exe
+4272 chrome.exe
+7044 chrome.exe
+7036 chrome.exe
+5884 chrome.exe
+4352 chrome.exe
+7524 SettingSyncHost.exe
+8436 pushbullet_client.exe
+8528 pushbullet_watchdog.exe
+9092 AvastUI.exe
+9140 fontdrvhost.exe
+9184 Dropbox.exe
+8296 unsecapp.exe
+8420 MOM.exe
+9036 jusched.exe
+6280 CCC.exe
+9236 id_bglaunch.exe
+9616 id_tray.exe
+8848 Skype.exe
+8664 vmware-tray.exe
+5016 VsHub.exe
+5668 Microsoft.VsHub.Server.HttpHost.exe
+6784 conhost.exe
+10876 StandardCollector.Service.exe
+5304 ApplicationFrameHost.exe
+5916 Calculator.exe
+11864 audiodg.exe
+4788 dllhost.exe
+10092 svchost.exe
+8592 chrome.exe
+4744 notepad++.exe
+6068 chrome.exe
+7940 KeePass.exe
+12940 chrome.exe
+11288 chrome.exe
+8120 Microsoft.VsHub.Server.HttpHostx64.exe
+12916 conhost.exe
+11704 VBCSCompiler.exe
+1424 conhost.exe
+2960 SearchProtocolHost.exe
+9200 devenv.exe
+1812 SearchProtocolHost.exe
+6132 SearchUI.exe
+  32 SearchFilterHost.exe
+4420 MSBuild.exe
+5820 conhost.exe
+8040 VBCSCompiler.exe
+10200 conhost.exe
+13288 ForensicCollection.vshost.exe
+7904 ScriptedSandbox64.exe
+6256 RemindersServer.exe
+5708 cmd.exe
+1736 conhost.exe
+10996 userdump.exe
+7144 nc.exe

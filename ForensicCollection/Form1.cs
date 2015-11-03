@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using System.Reflection; //for assembly
 using System.Diagnostics; //for process
@@ -33,16 +34,2174 @@ namespace ForensicCollection
         {
             if (saveOption == "Netcat Session")
             {
-                if(portTextBox.Text == null || portTextBox.Text == "")
+                if (portTextBox.Text == null || portTextBox.Text == "")
                 {
                     MessageBox.Show("Missing Port Number.");
                     return;
                 }
-                if(ipTextBox.Text == null || ipTextBox.Text == "")
+                if (ipTextBox.Text == null || ipTextBox.Text == "")
                 {
                     MessageBox.Show("Missing IP address to send to.");
                     return;
                 }
+
+
+                if (fport.Checked == true)
+                {
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & fport | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+
+                }
+                if (ntlast.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & NTLast | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                }
+                if (userdump.Checked == true)
+                {
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/OEM/userdump/" + " & userdump -p | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+
+                }
+                if (netstat_an.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & netstat -an | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                }
+                if (netstat_rn.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & netstat -rn | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (psfile.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/SysInternals/" + " & psfile -an | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(10000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (pslist.Checked == true)
+                {
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/SysInternals/" + " & pslist -an | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(10000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (ipconfig_all.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & ipconfig -all | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (date.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & date | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+
+                }
+                if (time.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & time | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+
+                }
+                if (psinfo_h_s_d.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/SysInternals/" + " & psinfo -h -s -d | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(10000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+
+                }
+                if (psloggedon.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/SysInternals/" + " & psloggedon | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(10000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                }
+                if (psservice.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/SysInternals/" + " & psservice | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(10000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (schtasks.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/SysInternals/" + " & schtasks | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(10000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (find.Checked == true)
+                {
+                    saveOutput(runCommand("find c:/ -printf '%m;%Ax;%AT;%Tx;%TT;%Cx;%CT;%U;%G;%s;%p\n'", toolsRoot + "/UnixUtils/usr/local/wbin/"), "find.txt");
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/UnixUtils/usr/local/wbin/" + " & find c:/ -printf '%m;%Ax;%AT;%Tx;%TT;%Cx;%CT;%U;%G;%s;%p\n' | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (psloglist.Checked == true)
+                {
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText1;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText1 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --BEGIN | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell1 = new Process();
+                    ProcessStartInfo RSStartInfo1 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo1.FileName = "cmd.exe";
+                    RSStartInfo1.Arguments = strCmdText1;
+                    RSStartInfo1.LoadUserProfile = true;
+
+                    RSStartInfo1.UseShellExecute = false;
+                    RSStartInfo1.RedirectStandardInput = true;
+                    RSStartInfo1.RedirectStandardOutput = true;
+                    RSStartInfo1.RedirectStandardError = true;
+                    RSStartInfo1.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell1.StartInfo = RSStartInfo1;
+                    reverseShell1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd1 = new Process();
+                    ProcessStartInfo killCmdStartInfo1 = new ProcessStartInfo();
+                    killCmdStartInfo1.FileName = "cmd.exe";
+                    killCmdStartInfo1.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo1.LoadUserProfile = true;
+
+                    killCmd1.StartInfo = killCmdStartInfo1;
+                    killCmd1.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText2;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText2 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/SysInternals/" + " & psloglist -s -x security | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell2 = new Process();
+                    ProcessStartInfo RSStartInfo2 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo2.FileName = "cmd.exe";
+                    RSStartInfo2.Arguments = strCmdText2;
+                    RSStartInfo2.LoadUserProfile = true;
+
+                    RSStartInfo2.UseShellExecute = false;
+                    RSStartInfo2.RedirectStandardInput = true;
+                    RSStartInfo2.RedirectStandardOutput = true;
+                    RSStartInfo2.RedirectStandardError = true;
+                    RSStartInfo2.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell2.StartInfo = RSStartInfo2;
+                    reverseShell2.Start();
+                    Thread.Sleep(10000);
+                    //**********************************************************************************************
+                    Process killCmd2 = new Process();
+                    ProcessStartInfo killCmdStartInfo2 = new ProcessStartInfo();
+                    killCmdStartInfo2.FileName = "cmd.exe";
+                    killCmdStartInfo2.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo2.LoadUserProfile = true;
+
+                    killCmd2.StartInfo = killCmdStartInfo2;
+                    killCmd2.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                    //****************************************************************************************************************
+                    // Connect to the Reverse Shell persistent listener on the Forensic computer
+                    //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+                    string strCmdText3;
+
+
+                    //Debug.WriteLine(portNum);
+                    //Debug.WriteLine(reverseShellNewListenerPortNum);
+                    //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+                    strCmdText3 = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & echo --END | nc " + ipTextBox.Text + " " + portTextBox.Text;
+                    //Debug.WriteLine(strCmdText);
+                    Process reverseShell3 = new Process();
+                    ProcessStartInfo RSStartInfo3 = new ProcessStartInfo();
+                    //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+                    RSStartInfo3.FileName = "cmd.exe";
+                    RSStartInfo3.Arguments = strCmdText3;
+                    RSStartInfo3.LoadUserProfile = true;
+
+                    RSStartInfo3.UseShellExecute = false;
+                    RSStartInfo3.RedirectStandardInput = true;
+                    RSStartInfo3.RedirectStandardOutput = true;
+                    RSStartInfo3.RedirectStandardError = true;
+                    RSStartInfo3.WindowStyle = ProcessWindowStyle.Hidden;//don't show cmd prompt
+
+                    reverseShell3.StartInfo = RSStartInfo3;
+                    reverseShell3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+                    Process killCmd3 = new Process();
+                    ProcessStartInfo killCmdStartInfo3 = new ProcessStartInfo();
+                    killCmdStartInfo3.FileName = "cmd.exe";
+                    killCmdStartInfo3.Arguments = "/C TASKKILL /F /IM cmd.exe /T";
+                    killCmdStartInfo3.LoadUserProfile = true;
+
+                    killCmd3.StartInfo = killCmdStartInfo3;
+                    killCmd3.Start();
+                    Thread.Sleep(3000);
+                    //**********************************************************************************************
+
+                    // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+                    //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+                    //****************************************************************************************************************
+                }
+                if (sha1sum.Checked == true)
+                {
+                    sha1sumAllFiles(Directory.GetCurrentDirectory() + "/Evidence/");
+                }
+                output.Text += "Finished Running All Commands.";
+                if (string.IsNullOrEmpty(errorOnTools) == false)
+                {
+                    MessageBox.Show("There were errors while trying to run the following commands:\n" + errorOnTools + "\nto prevent these simply setup your forensic enviornment by clicking the 'Get Tools' button and then pressing 'Start'.");
+                }
+
+
             }
             string netcat = "" + portTextBox.Text;
             output.Text = "";
@@ -125,7 +2284,45 @@ namespace ForensicCollection
             {
                 MessageBox.Show("There were errors while trying to run the following commands:\n" + errorOnTools + "\nto prevent these simply setup your forensic enviornment by clicking the 'Get Tools' button and then pressing 'Start'.");
             }
-       }
+        }
+
+        private void testRun(string commandToExecute, string dirToExecute)
+        {
+
+            // Connect to the Reverse Shell persistent listener on the Forensic computer
+            //runCommand("nc " + ipTextBox.Text + " " + portTextBox.Text, toolsRoot + "/NetCat/");
+            string strCmdText;
+
+
+            //Debug.WriteLine(portNum);
+            //Debug.WriteLine(reverseShellNewListenerPortNum);
+            //                strCmdText = "nc " + ipTextBox.Text + " " + portTextBox.Text;
+
+            strCmdText = "/C cd " + Directory.GetCurrentDirectory() + "/RawTools/" + " & fport | nc " + ipTextBox.Text + " " + portTextBox.Text;
+            //Debug.WriteLine(strCmdText);
+            Process reverseShell = new Process();
+            ProcessStartInfo RSStartInfo = new ProcessStartInfo();
+            //RSStartInfo.WindowStyle = ProcessWindowStyle.Maximized;  //Testing purposes only
+            RSStartInfo.FileName = "cmd.exe";
+            RSStartInfo.Arguments = strCmdText;
+            RSStartInfo.LoadUserProfile = true;
+
+            RSStartInfo.UseShellExecute = false;
+            RSStartInfo.RedirectStandardInput = true;
+            RSStartInfo.RedirectStandardOutput = true;
+            RSStartInfo.RedirectStandardError = true;
+
+            reverseShell.StartInfo = RSStartInfo;
+            reverseShell.Start();
+            reverseShell.Kill();
+
+            //Thread.Sleep(5000);
+            // This is the type of command you will send to the reverse shell to create another listner on the forensic machine.
+            //reverseShell.StandardInput.WriteLine("cmd.exe /k nc -l -v -p " + reverseShellNewListenerPortNum + " > FINDME.txt");
+
+
+
+        }
 
         private string runCommand(string commandToExecute, string dirToExecute)
         {
@@ -146,12 +2343,13 @@ namespace ForensicCollection
             processStartInfo.UseShellExecute = false;//this is to allow the redirecting of output to our string
 
             Process process = Process.Start("cmd", "cd " + Directory.GetCurrentDirectory() + "/RawTools/");
-            try {
+            try
+            {
                 process = Process.Start(processStartInfo);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                errorOnTools += commandToExecute+"\n";
+                errorOnTools += commandToExecute + "\n";
             }
             using (StreamReader streamReader = process.StandardOutput)
             {
@@ -252,7 +2450,7 @@ namespace ForensicCollection
             if (saveOption == "Netcat Session")
             {
                 portText.Text = "Send Through Port:";
-                portText.Visible =  true;
+                portText.Visible = true;
                 portTextBox.Visible = true;
                 sendIPLabel.Visible = true;
                 ipTextBox.Visible = true;
