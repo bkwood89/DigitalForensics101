@@ -1,0 +1,113 @@
+--BEGIN 
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : BlackBox
+   Primary Dns Suffix  . . . . . . . : 
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Intel(R) 82579V Gigabit Network Connection
+   Physical Address. . . . . . . . . : 8C-89-A5-80-B1-E6
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::9dcd:8779:864a:3674%4(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 192.168.1.111(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Lease Obtained. . . . . . . . . . : Saturday, October 31, 2015 12:04:04 PM
+   Lease Expires . . . . . . . . . . : Sunday, November 1, 2015 12:04:04 PM
+   Default Gateway . . . . . . . . . : 192.168.1.1
+   DHCP Server . . . . . . . . . . . : 192.168.1.1
+   DHCPv6 IAID . . . . . . . . . . . : 59541925
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-1D-18-BF-BB-8C-89-A5-80-B1-E6
+   DNS Servers . . . . . . . . . . . : 192.168.1.1
+   Primary WINS Server . . . . . . . : 192.168.1.1
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Ethernet adapter VMware Network Adapter VMnet1:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : VMware Virtual Ethernet Adapter for VMnet1
+   Physical Address. . . . . . . . . : 00-50-56-C0-00-01
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::e176:399:22a5:aac1%18(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 192.168.48.1(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Lease Obtained. . . . . . . . . . : Saturday, October 31, 2015 12:04:20 PM
+   Lease Expires . . . . . . . . . . : Saturday, October 31, 2015 6:39:14 PM
+   Default Gateway . . . . . . . . . : 
+   DHCP Server . . . . . . . . . . . : 192.168.48.254
+   DHCPv6 IAID . . . . . . . . . . . : 335564886
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-1D-18-BF-BB-8C-89-A5-80-B1-E6
+   DNS Servers . . . . . . . . . . . : fec0:0:0:ffff::1%1
+                                       fec0:0:0:ffff::2%1
+                                       fec0:0:0:ffff::3%1
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Ethernet adapter VMware Network Adapter VMnet8:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : VMware Virtual Ethernet Adapter for VMnet8
+   Physical Address. . . . . . . . . : 00-50-56-C0-00-08
+   DHCP Enabled. . . . . . . . . . . : Yes
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::1ceb:de3c:eea8:53b9%10(Preferred) 
+   IPv4 Address. . . . . . . . . . . : 192.168.44.1(Preferred) 
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Lease Obtained. . . . . . . . . . : Saturday, October 31, 2015 12:04:20 PM
+   Lease Expires . . . . . . . . . . : Saturday, October 31, 2015 6:39:14 PM
+   Default Gateway . . . . . . . . . : 
+   DHCP Server . . . . . . . . . . . : 192.168.44.254
+   DHCPv6 IAID . . . . . . . . . . . : 352342102
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-1D-18-BF-BB-8C-89-A5-80-B1-E6
+   DNS Servers . . . . . . . . . . . : fec0:0:0:ffff::1%1
+                                       fec0:0:0:ffff::2%1
+                                       fec0:0:0:ffff::3%1
+   Primary WINS Server . . . . . . . : 192.168.44.2
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+
+Tunnel adapter Teredo Tunneling Pseudo-Interface:
+
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft Teredo Tunneling Adapter
+   Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+   IPv6 Address. . . . . . . . . . . : 2001:0:5ef5:79fb:1849:13b3:38e1:4764(Preferred) 
+   Link-local IPv6 Address . . . . . : fe80::1849:13b3:38e1:4764%14(Preferred) 
+   Default Gateway . . . . . . . . . : ::
+   DHCPv6 IAID . . . . . . . . . . . : 83886080
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-1D-18-BF-BB-8C-89-A5-80-B1-E6
+   NetBIOS over Tcpip. . . . . . . . : Disabled
+
+Tunnel adapter isatap.{AA4FCDB4-46EE-4EE5-8D95-E06899679575}:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft ISATAP Adapter #2
+   Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+
+Tunnel adapter isatap.{F6E72ED8-CBA9-4FFF-8A5D-B32C348FC137}:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft ISATAP Adapter #3
+   Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+
+Tunnel adapter isatap.{33A79735-BBD1-4805-91B8-70227FC40D15}:
+
+   Media State . . . . . . . . . . . : Media disconnected
+   Connection-specific DNS Suffix  . : 
+   Description . . . . . . . . . . . : Microsoft ISATAP Adapter #4
+   Physical Address. . . . . . . . . : 00-00-00-00-00-00-00-E0
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes

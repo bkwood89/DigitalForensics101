@@ -1,0 +1,7 @@
+FPort v2.0 - TCP/IP Process to Port Mapper
+--BEGIN 
+FPort v2.0 - TCP/IP Process to Port Mapper
+Copyright 2000 by Foundstone, Inc.
+http://www.foundstone.com
+
+You must have administrator privileges to run fport - exiting...
