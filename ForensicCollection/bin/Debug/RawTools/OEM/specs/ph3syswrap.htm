@@ -1,0 +1,2685 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./ph3syswrap_files/filelist.xml">
+<title>Driver Verifier and System Information API Wrapper Specification (Phase
+3)</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Ted Miller</o:Author>
+  <o:LastAuthor>Takefumi Kakimoto</o:LastAuthor>
+  <o:Revision>3</o:Revision>
+  <o:TotalTime>984</o:TotalTime>
+  <o:LastPrinted>1998-07-10T19:56:00Z</o:LastPrinted>
+  <o:Created>1999-10-25T08:41:00Z</o:Created>
+  <o:LastSaved>1999-12-25T08:09:00Z</o:LastSaved>
+  <o:Pages>15</o:Pages>
+  <o:Words>5158</o:Words>
+  <o:Characters>29402</o:Characters>
+  <o:Company>MSFT</o:Company>
+  <o:Lines>245</o:Lines>
+  <o:Paragraphs>58</o:Paragraphs>
+  <o:CharactersWithSpaces>36107</o:CharactersWithSpaces>
+  <o:Version>9.2812</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:DoNotShowRevisions/>
+  <w:DisplayHorizontalDrawingGridEvery>0</w:DisplayHorizontalDrawingGridEvery>
+  <w:DisplayVerticalDrawingGridEvery>0</w:DisplayVerticalDrawingGridEvery>
+  <w:UseMarginsForDrawingGridOrigin/>
+  <w:Compatibility>
+   <w:FootnoteLayoutLikeWW8/>
+   <w:ShapeLayoutLikeWW8/>
+   <w:AlignTablesRowByRow/>
+   <w:ForgetLastTabAlignment/>
+   <w:LayoutRawTableWidth/>
+   <w:LayoutTableRowsApart/>
+   <w:UseFELayout/>
+  </w:Compatibility>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-alt:"MS Mincho";
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+@font-face
+	{font-family:Tahoma;
+	panose-1:2 11 6 4 3 5 4 4 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:553679495 -2147483648 8 0 66047 0;}
+@font-face
+	{font-family:"MS Mincho";
+	panose-1:2 2 6 9 4 2 5 8 3 4;
+	mso-font-charset:128;
+	mso-generic-font-family:roman;
+	mso-font-pitch:fixed;
+	mso-font-signature:-1610612033 1757936891 16 0 131231 0;}
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+h1
+	{mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:12.0pt;
+	margin-left:21.6pt;
+	text-indent:-21.6pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:1;
+	mso-list:l1 level1 lfo2;
+	tab-stops:list 21.6pt;
+	font-size:18.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:0pt;
+	mso-bidi-language:HE;
+	mso-bidi-font-weight:normal;}
+h2
+	{mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:12.0pt;
+	margin-left:28.8pt;
+	text-indent:-28.8pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:2;
+	mso-list:l1 level2 lfo2;
+	tab-stops:list 28.8pt;
+	font-size:15.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-language:HE;
+	mso-bidi-font-weight:normal;}
+h3
+	{mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:12.0pt;
+	margin-left:36.0pt;
+	text-indent:-36.0pt;
+	mso-pagination:none;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	mso-list:l1 level3 lfo2;
+	tab-stops:list 36.0pt;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-language:HE;
+	mso-bidi-font-weight:normal;}
+h4
+	{mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:12.0pt;
+	margin-left:43.2pt;
+	text-indent:-43.2pt;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:4;
+	mso-list:l1 level4 lfo2;
+	tab-stops:list 43.2pt;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-language:HE;
+	mso-bidi-font-weight:normal;}
+h5
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0mm;
+	margin-bottom:3.0pt;
+	margin-left:50.4pt;
+	text-indent:-50.4pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:5;
+	mso-list:l1 level5 lfo2;
+	tab-stops:list 50.4pt;
+	font-size:11.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-language:HE;
+	font-weight:normal;}
+h6
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0mm;
+	margin-bottom:3.0pt;
+	margin-left:57.6pt;
+	text-indent:-57.6pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:6;
+	mso-list:l1 level6 lfo2;
+	tab-stops:list 57.6pt;
+	font-size:11.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-bidi-language:HE;
+	font-weight:normal;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.MsoHeading7, li.MsoHeading7, div.MsoHeading7
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0mm;
+	margin-bottom:3.0pt;
+	margin-left:64.8pt;
+	text-indent:-64.8pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:7;
+	mso-list:l1 level7 lfo2;
+	tab-stops:list 64.8pt;
+	font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-language:HE;}
+p.MsoHeading8, li.MsoHeading8, div.MsoHeading8
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0mm;
+	margin-bottom:3.0pt;
+	margin-left:72.0pt;
+	text-indent:-72.0pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:8;
+	mso-list:l1 level8 lfo2;
+	tab-stops:list 72.0pt;
+	font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-language:HE;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.MsoHeading9, li.MsoHeading9, div.MsoHeading9
+	{mso-style-next:Normal;
+	margin-top:12.0pt;
+	margin-right:0mm;
+	margin-bottom:3.0pt;
+	margin-left:79.2pt;
+	text-indent:-79.2pt;
+	mso-pagination:widow-orphan;
+	mso-outline-level:9;
+	mso-list:l1 level9 lfo2;
+	tab-stops:list 79.2pt;
+	font-size:9.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Arial;
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-language:HE;
+	font-weight:bold;
+	mso-bidi-font-weight:normal;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+p.MsoToc1, li.MsoToc1, div.MsoToc1
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc2, li.MsoToc2, div.MsoToc2
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:12.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc3, li.MsoToc3, div.MsoToc3
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:24.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc4, li.MsoToc4, div.MsoToc4
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:72.0pt;
+	margin-bottom:.0001pt;
+	text-indent:-36.0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc5, li.MsoToc5, div.MsoToc5
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:48.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc6, li.MsoToc6, div.MsoToc6
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:60.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc7, li.MsoToc7, div.MsoToc7
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:108.0pt;
+	margin-bottom:.0001pt;
+	text-indent:-36.0pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc8, li.MsoToc8, div.MsoToc8
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:84.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoToc9, li.MsoToc9, div.MsoToc9
+	{mso-style-update:auto;
+	mso-style-next:Normal;
+	margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:96.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoNormalIndent, li.MsoNormalIndent, div.MsoNormalIndent
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:42.55pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoFootnoteText, li.MsoFootnoteText, div.MsoFootnoteText
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoCommentText, li.MsoCommentText, div.MsoCommentText
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoHeader, li.MsoHeader, div.MsoHeader
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 216.0pt right 432.0pt;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoFooter, li.MsoFooter, div.MsoFooter
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:center 216.0pt right 432.0pt;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+span.MsoFootnoteReference
+	{vertical-align:super;}
+span.MsoCommentReference
+	{mso-ansi-font-size:8.0pt;
+	mso-bidi-font-size:9.0pt;}
+p.MsoBodyText, li.MsoBodyText, div.MsoBodyText
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-language:HE;}
+p.MsoBodyTextIndent, li.MsoBodyTextIndent, div.MsoBodyTextIndent
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoBodyTextIndent2, li.MsoBodyTextIndent2, div.MsoBodyTextIndent2
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:72.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoBodyTextIndent3, li.MsoBodyTextIndent3, div.MsoBodyTextIndent3
+	{margin-top:0mm;
+	margin-right:0mm;
+	margin-bottom:0mm;
+	margin-left:35.45pt;
+	margin-bottom:.0001pt;
+	text-indent:.55pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+p.MsoBlockText, li.MsoBlockText, div.MsoBlockText
+	{margin-top:0mm;
+	margin-right:39.1pt;
+	margin-bottom:0mm;
+	margin-left:36.0pt;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;
+	font-style:italic;
+	mso-bidi-font-style:normal;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:purple;
+	text-decoration:underline;
+	text-underline:single;}
+strong
+	{mso-bidi-font-weight:normal;}
+em
+	{mso-bidi-font-style:normal;}
+p.MsoDocumentMap, li.MsoDocumentMap, div.MsoDocumentMap
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	background:navy;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:Tahoma;
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-language:HE;}
+p.MsoPlainText, li.MsoPlainText, div.MsoPlainText
+	{margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-font-family:"Times New Roman";
+	mso-bidi-language:HE;}
+p.Normal, li.Normal, div.Normal
+	{mso-style-name:Normal;
+	margin:0mm;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	mso-bidi-font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-language:HE;}
+ /* Page Definitions */
+@page
+	{mso-page-border-surround-header:no;
+	mso-page-border-surround-footer:no;}
+@page Section1
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 66.25pt 72.0pt 66.25pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-page-numbers:roman-lower 1;
+	mso-title-page:yes;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+@page Section2
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 66.25pt 72.0pt 66.25pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-page-numbers:roman-lower 1;
+	mso-paper-source:0;}
+div.Section2
+	{page:Section2;}
+@page Section3
+	{size:612.0pt 792.0pt;
+	margin:72.0pt 66.25pt 72.0pt 66.25pt;
+	mso-header-margin:36.0pt;
+	mso-footer-margin:36.0pt;
+	mso-page-numbers:1;
+	mso-paper-source:0;}
+div.Section3
+	{page:Section3;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:498811144;
+	mso-list-type:hybrid;
+	mso-list-template-ids:701291220 666389252 67698691 67698693 67698689 67698691 67698693 67698689 67698691 67698693;}
+@list l0:level1
+	{mso-level-start-at:0;
+	mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	text-indent:-18.0pt;
+	font-family:Symbol;
+	mso-fareast-font-family:"MS Mincho";
+	mso-bidi-font-family:"Times New Roman";}
+@list l1
+	{mso-list-id:801003421;
+	mso-list-template-ids:-1259587270;}
+@list l1:level1
+	{mso-level-tab-stop:21.6pt;
+	mso-level-number-position:left;
+	margin-left:21.6pt;
+	text-indent:-21.6pt;}
+@list l1:level2
+	{mso-level-text:"%1\.%2";
+	mso-level-tab-stop:28.8pt;
+	mso-level-number-position:left;
+	margin-left:28.8pt;
+	text-indent:-28.8pt;}
+@list l1:level3
+	{mso-level-text:"%1\.%2\.%3";
+	mso-level-tab-stop:36.0pt;
+	mso-level-number-position:left;
+	margin-left:36.0pt;
+	text-indent:-36.0pt;}
+@list l1:level4
+	{mso-level-text:"%1\.%2\.%3\.%4";
+	mso-level-tab-stop:43.2pt;
+	mso-level-number-position:left;
+	margin-left:43.2pt;
+	text-indent:-43.2pt;}
+@list l1:level5
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5";
+	mso-level-tab-stop:50.4pt;
+	mso-level-number-position:left;
+	margin-left:50.4pt;
+	text-indent:-50.4pt;}
+@list l1:level6
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6";
+	mso-level-tab-stop:57.6pt;
+	mso-level-number-position:left;
+	margin-left:57.6pt;
+	text-indent:-57.6pt;}
+@list l1:level7
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7";
+	mso-level-tab-stop:64.8pt;
+	mso-level-number-position:left;
+	margin-left:64.8pt;
+	text-indent:-64.8pt;}
+@list l1:level8
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8";
+	mso-level-tab-stop:72.0pt;
+	mso-level-number-position:left;
+	margin-left:72.0pt;
+	text-indent:-72.0pt;}
+@list l1:level9
+	{mso-level-text:"%1\.%2\.%3\.%4\.%5\.%6\.%7\.%8\.%9";
+	mso-level-tab-stop:79.2pt;
+	mso-level-number-position:left;
+	margin-left:79.2pt;
+	text-indent:-79.2pt;}
+ol
+	{margin-bottom:0mm;}
+ul
+	{margin-bottom:0mm;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+  <o:regrouptable v:ext="edit">
+   <o:entry new="1" old="0"/>
+   <o:entry new="2" old="0"/>
+   <o:entry new="3" old="0"/>
+   <o:entry new="4" old="0"/>
+   <o:entry new="5" old="4"/>
+   <o:entry new="6" old="5"/>
+   <o:entry new="7" old="5"/>
+   <o:entry new="8" old="5"/>
+  </o:regrouptable>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body lang=JA link=blue vlink=purple style='tab-interval:36.0pt'>
+
+<div class=Section1>
+
+<p class=MsoNormal><b style='mso-bidi-font-weight:normal'><span lang=EN-US>Driver
+Verifier and System Information API Wrapper Specification (Phase 3)<o:p></o:p></span></b></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Last Updated: </span><!--[if supportFields]><span
+lang=EN-US><span style='mso-element:field-begin'></span><span
+style="mso-spacerun: yes"> </span>TIME \@ &quot;M/d/yy&quot; <span
+style='mso-element:field-separator'></span></span><![endif]--><span lang=EN-US>12/25/99</span><!--[if supportFields]><span
+lang=EN-US><span style='mso-element:field-end'></span></span><![endif]--></p>
+
+<div style='border:none;border-bottom:solid windowtext .5pt;padding:0mm 0mm 1.0pt 0mm'>
+
+<p class=MsoNormal style='border:none;mso-border-bottom-alt:solid windowtext .5pt;
+padding:0mm;mso-padding-alt:0mm 0mm 1.0pt 0mm'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<span lang=EN-US style='font-size:12.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Times New Roman";mso-fareast-font-family:"MS Mincho";mso-ansi-language:EN-US;
+mso-fareast-language:EN-US;mso-bidi-language:HE'><br clear=all
+style='page-break-before:always;mso-break-type:section-break'>
+</span>
+
+<div class=Section2>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 479.0pt'><a
+name=tableofcontents></a><!--[if supportFields]><span lang=EN-US><span
+style='mso-element:field-begin'></span><span style="mso-spacerun:
+yes"> </span>TOC \o &quot;1-3&quot; \h \z <span style='mso-element:field-separator'></span></span><![endif]--><span
+lang=EN-US><span class=MsoHyperlink><a href="#_Toc465449517"><span
+style='mso-bidi-font-size:18.0pt'>1.</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>     </span></span><span style='mso-bidi-font-size:18.0pt'>Introduction</span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449517 \\h"'>1<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500310037000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449518"><span
+style='mso-bidi-font-size:18.0pt'>2.</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>     </span></span><span style='mso-bidi-font-size:18.0pt'>General Routines</span><span
+style='color:windowtext;display:none;mso-hide:screen;text-decoration:none;
+text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449518 \\h"'>1<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500310038000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449519"><span
+style='mso-bidi-font-size:18.0pt'>3.</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>     </span></span><span style='mso-bidi-font-size:18.0pt'>Driver Verifier
+Control and Statistics</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449519 \\h"'>1<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500310039000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449520"><span
+style='mso-bidi-font-size:15.0pt'>3.1</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Data
+Structures</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449520 \\h"'>2<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320030000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449521"><span
+style='mso-bidi-font-size:15.0pt'>3.2</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Retrieving
+Driver Verifier Settings</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449521 \\h"'>3<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320031000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449522"><span
+style='mso-bidi-font-size:15.0pt'>3.3</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Setting
+Driver Verifier Settings</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449522 \\h"'>3<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320032000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449523"><span
+style='mso-bidi-font-size:15.0pt'>3.4</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Getting
+Global Verification Statistics</span><span style='color:windowtext;display:
+none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449523 \\h"'>4<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320033000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449524"><span
+style='mso-bidi-font-size:15.0pt'>3.5</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Getting
+Per Driver Verification Statistics</span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449524 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320034000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449525"><span
+style='mso-bidi-font-size:18.0pt'>4.</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>     </span></span><span style='mso-bidi-font-size:18.0pt'>Process
+Statistics</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449525 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320035000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449526"><span
+style='mso-bidi-font-size:15.0pt'>4.1</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Data
+Structure</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449526 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320036000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449527"><span
+style='mso-bidi-font-size:15.0pt'>4.2</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Querying
+Process Statistics</span><span style='color:windowtext;display:none;mso-hide:
+screen;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449527 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320037000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449528"><span
+style='mso-bidi-font-size:18.0pt'>5.</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>     </span></span><span style='mso-bidi-font-size:18.0pt'>Handle and Object
+Type Information</span><span style='color:windowtext;display:none;mso-hide:
+screen;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449528 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320038000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449529"><span
+style='mso-bidi-font-size:15.0pt'>5.1</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Data
+Structures</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449529 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500320039000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449530"><span
+style='mso-bidi-font-size:15.0pt'>5.2</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Querying
+Handle Information By Process</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449530 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500330030000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449531"><span
+style='mso-bidi-font-size:15.0pt'>5.3</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Querying
+Handle Information By Object Type</span><span style='color:windowtext;
+display:none;mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449531 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500330031000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449532"><span
+style='mso-bidi-font-size:15.0pt'>5.4</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Querying
+Object Type Information</span><span style='color:windowtext;display:none;
+mso-hide:screen;text-decoration:none;text-underline:none'><span
+style='mso-tab-count:1 dotted'>. </span><span style='mso-field-code:"PAGEREF _Toc465449532 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500330032000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc1 style='tab-stops:24.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449533"><span
+style='mso-bidi-font-size:18.0pt'>6.</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>     </span></span><span style='mso-bidi-font-size:18.0pt'>System
+GlobalFlags</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449533 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500330033000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449534"><span
+style='mso-bidi-font-size:15.0pt'>6.1</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Data
+Structures</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449534 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500330034000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449535"><span
+style='mso-bidi-font-size:15.0pt'>6.2</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Querying
+GlobalFlags</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449535 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500330035000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoToc2 style='tab-stops:72.0pt right dotted 479.0pt'><span
+class=MsoHyperlink><span lang=EN-US><a href="#_Toc465449536"><span
+style='mso-bidi-font-size:15.0pt'>6.3</span><span style='mso-bidi-font-size:
+12.0pt;mso-fareast-font-family:"Times New Roman";color:windowtext;mso-bidi-language:
+AR-SA;text-decoration:none;text-underline:none'><span style='mso-tab-count:
+1'>               </span></span><span style='mso-bidi-font-size:15.0pt'>Setting
+GlobalFlags</span><span style='color:windowtext;display:none;mso-hide:screen;
+text-decoration:none;text-underline:none'><span style='mso-tab-count:1 dotted'>. </span><span
+style='mso-field-code:"PAGEREF _Toc465449536 \\h"'>5<!--[if gte mso 9]><xml>
+ <w:data>08D0C9EA79F9BACE118C8200AA004BA90B02000000080000000E0000005F0054006F0063003400360035003400340039003500330036000000</w:data>
+</xml><![endif]--></span></span></a></span></span><span lang=EN-US
+style='mso-bidi-font-size:12.0pt;mso-fareast-font-family:"Times New Roman";
+mso-bidi-language:AR-SA'><o:p></o:p></span></p>
+
+<p class=MsoNormal><!--[if supportFields]><span lang=EN-US><span
+style='mso-element:field-end'></span></span><![endif]--><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+<span lang=EN-US style='font-size:12.0pt;mso-bidi-font-size:10.0pt;font-family:
+"Times New Roman";mso-fareast-font-family:"MS Mincho";mso-ansi-language:EN-US;
+mso-fareast-language:EN-US;mso-bidi-language:HE'><br clear=all
+style='page-break-before:always;mso-break-type:section-break'>
+</span>
+
+<div class=Section3>
+
+<h1><a name="_Toc465449517"><![if !supportLists]><span lang=EN-US>1.<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Introduction</span></a></h1>
+
+<p class=MsoNormal><span lang=EN-US>This document specifies a DLL containing
+wrappers for various functions that are only available via the
+NtQuerySystemInformation API, and other miscellaneous system functionality.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The DLL is syswrap.dll; the public header
+file for this DLL is syswrap.h and the import library is syswrap.lib.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>In phase 3 only 32-bit x86 is supported by
+this DLL. The DLL runs only on NT4 and later, though not all functions are
+available when running on various OS versions.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Routines are supplied for the following
+general classes of functionality. Each is discussed in its own section below.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<ul style='margin-top:0mm' type=disc>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo5;tab-stops:list 36.0pt'><span
+     lang=EN-US><a href="#_General_Routines">General Purpose</a></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo5;tab-stops:list 36.0pt'><span
+     lang=EN-US><a href="#_Driver_Verifier_Control">Driver Verifier Control and
+     Statistics</a></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo5;tab-stops:list 36.0pt'><span
+     lang=EN-US><a href="#_Process_Statistics">Process Statistics</a></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo5;tab-stops:list 36.0pt'><span
+     lang=EN-US><a href="#_Handle_and_Object">Handle and Object Type
+     Information</a></span></li>
+ <li class=MsoNormal style='mso-list:l0 level1 lfo5;tab-stops:list 36.0pt'><span
+     lang=EN-US><a href="#_System_GlobalFlags">System GlobalFlags</a></span></li>
+</ul>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>            </span></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h1><a name="_Toc465449518"></a><a name="_Ref450993127"></a><a
+name="_Command_Line_Process"></a><a name="_General_Routines"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449518'><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US>2.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span></span><![endif]><span style='mso-bookmark:_Toc465449518'><span
+style='mso-bookmark:_Ref450993127'><span lang=EN-US>General Routines</span></span></span><span
+style='mso-bookmark:_Ref450993127'></span></h1>
+
+<p class=MsoNormal><span style='mso-bookmark:_Ref450993127'><span lang=EN-US>The
+DLL provides some general-purpose routines.</span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:_Ref450993127'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:_Ref450993127'><span lang=EN-US><span
+style='mso-tab-count:1'>            </span><b>SysQueryDllVersion</b> — return
+version information about the wrapper DLL</span></span></p>
+
+<p class=MsoNormal><span style='mso-bookmark:_Ref450993127'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoBodyTextIndent><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US>VOID<br>
+APIENTRY<br>
+<b>SysQueryDllVersion</b>(<br>
+<span style='mso-tab-count:1'>            </span>OUT WORD *<i>Major</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT WORD *<i>Minor</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><u><span
+lang=EN-US>Parameters:<o:p></o:p></span></u></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><i><span
+lang=EN-US>Major</span></i><span lang=EN-US> — receives the major version of
+the DLL. This is currently 1.</span></span></p>
+
+<p class=MsoToc4><span style='mso-bookmark:_Ref450993127'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><i><span
+lang=EN-US>Minor</span></i><span lang=EN-US> — receives the minor version of
+the DLL. This is currently 0.</span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><u><span
+lang=EN-US>Return Value:<o:p></o:p></span></u></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US>None.</span></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span style='mso-bookmark:_Ref450993127'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span style='mso-bookmark:
+_Ref450993127'><span lang=EN-US style='font-size:10.0pt;color:#333333'>Table of
+Contents</span><span lang=EN-US> </span></span><a href="#tableofcontents"><span
+style='mso-bookmark:_Ref450993127'><span lang=EN-US style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></span><span
+style='mso-bookmark:_Ref450993127'></span></a><span style='mso-bookmark:_Ref450993127'></span></p>
+
+<p class=MsoToc1><span style='mso-bookmark:_Ref450993127'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></span></p>
+
+<h1><span style='mso-bookmark:_Ref450993127'><a name="_Toc465449519"></a><a
+name="_Driver_Verifier_Control"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449519'><span lang=EN-US>3.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449519'><span
+lang=EN-US>Driver Verifier</span></span></span><span style='mso-bookmark:_Toc465449519'><span
+lang=EN-US> Control and Statistics</span></span></h1>
+
+<p class=MsoNormal><span lang=EN-US>The DLL contains a set of routines for
+manipulating the settings of the Windows 2000 driver verifier, and querying
+statistics that are maintained by the verifier for drivers being verified. The
+driver verifier is documented at <a
+href="http://www.microsoft.com/HWDEV/driver/driververify.htm">http://www.microsoft.com/HWDEV/driver/driververify.htm</a>
+and <a href="http://www.microsoft.com/DDK/DDKdocs/Win2k/drverif_5nqf.htm">http://www.microsoft.com/DDK/DDKdocs/Win2k/drverif_5nqf.htm</a>.
+It is assumed that the reader is familiar with the driver verifier (and
+therefore the rationale for using the routines provided by this DLL).</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>These routines function successfully only
+on Windows 2000 and later. They do not function on NT4.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc4><b><span lang=EN-US>SysQueryDriverVerifierSettings</span></b><span
+lang=EN-US> — retrieve driver verifier settings</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><b><span lang=EN-US>SysSetDriverVerifierSettings</span></b><span
+lang=EN-US> — configure the driver verifier</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><b><span lang=EN-US>SysGetDriverVerifierGlobalStatistics</span></b><span
+lang=EN-US> — get global statistics for drivers being verified</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SysGetDriverVerifierPerDriverStatistics</span></b><span lang=EN-US>
+— get per driver stats for drivers being verified</span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The sections that follow describe these
+routines in greater detail.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449520"></a><a name="_Displaying_a_Process"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449520'><span lang=EN-US>3.1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449520'><span
+lang=EN-US>Data Structures</span></span></h2>
+
+<p class=MsoNormal><span lang=EN-US>The following data structures are used with
+the driver verifier routines in this DLL.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>The <b>DriverVerifierFeatures</b> enum is a
+list of the driver verifier levels. The values can be combined bitwise.</span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>typedef enum {<br>
+<span style='mso-tab-count:1'>            </span><b>DvFeatureSpecialPool</b> =
+1,<br>
+<span style='mso-tab-count:1'>            </span><b>DvFeatureIrqlChecking</b> =
+2,<br>
+<span style='mso-tab-count:1'>            </span><b>DvFeatureAllocationFaultInjection</b>
+= 4,<br>
+<span style='mso-tab-count:1'>            </span><b>DvFeaturePoolTracking</b> =
+8,<br>
+<span style='mso-tab-count:1'>            </span><b>DvFeatureIoVerification</b>
+= 16<br>
+} <b>DriverVerifierFeatures</b>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><a name="DV_SETTING"></a><span lang=EN-US>The <b>SX_DRIVER_VERIFIER_SETTING</b>
+structure describes one individual per-driver driver verifier setting, which is
+an association between a particular driver and a set of enabled driver verifier
+features.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>typedef struct
+_SX_<span style='mso-bidi-font-style:italic'>DRIVER_VERIFIER_S</span>ETTING {<br>
+<span style='mso-tab-count:1'>            </span>DriverVerifierFeatures <i>Features</i>;<br>
+<span style='mso-tab-count:1'>            </span>WCHAR <i>Driver</i>[MAX_PATH];<br>
+} <b>SX_DRIVER_VERIFIER_SETTING</b>, *<b>PSX_DRIVER_VERIFIER_SETTING</b>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><a name="DV_GLOBAL_STATISTICS"></a><span lang=EN-US>The <b>SX_DRIVER_VERIFIER_GLOBAL_STATISTICS</b>
+structure represents the statistics maintained by the driver verifier
+cumulatively for all drivers being verified, as long as there is at least one
+driver being verified. Drivers not being verified are not included in the
+statistics.</span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>typedef struct
+_SX_DRIVER_VERIFIER_GLOBAL_STATISTICS {<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>StructureSize</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>RaiseIrqls</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>AcquireSpinLocks</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>UntrackedPool</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>SynchronizeExecutions</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>AllocationsAttempted</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>AllocationsSucceeded</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>AllocationsSucceededSpecialPool</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>AllocationsWithNoTag</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>AllocationsFailed</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>AllocationsFailedDeliberately</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>TrimRequests</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>Trims</i>;<br>
+} <b>SX_DRIVER_VERIFIER_GLOBAL_STATISTICS</b>, *<b>PSX_DRIVER_VERIFIER_GLOBAL_STATISTICS</b>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><a name="DV_PERDRIVER_STATISTICS"></a><span lang=EN-US>The <b>SX_DRIVER_VERIFIER_PERDRIVER_STATISTICS</b>
+structure represents the statistics maintained by the driver verifier on a
+per-driver basis for each driver being verified.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>typedef struct
+_SX_DRIVER_VERIFIER_PERDRIVER_STATISTICS {<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>StructureSize</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>Loads</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>Unloads</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>CurrentPagedPoolAllocations</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>CurrentNonPagedPoolAllocations</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>PeakPagedPoolAllocations</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>PeakNonPagedPoolAllocations</i>;<br>
+<span style='mso-tab-count:1'>            </span>SIZE_T <i>PagedPoolUsageInBytes</i>;<br>
+<span style='mso-tab-count:1'>            </span>SIZE_T <i>NonPagedPoolUsageInBytes</i>;<br>
+<span style='mso-tab-count:1'>            </span>SIZE_T <i>PeakPagedPoolUsageInBytes</i>;<br>
+<span style='mso-tab-count:1'>            </span>SIZE_T <i>PeakNonPagedPoolUsageInBytes</i>;<br>
+} <b>SX_DRIVER_VERIFIER_PERDRIVER_STATISTICS</b>, *<b>PSX_DRIVER_VERIFIER_PERDRIVER_STATISTICS</b>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449521"><![if !supportLists]><span lang=EN-US>3.2<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Retrieving Driver Verifier Settings</span></a></h2>
+
+<p class=MsoToc1 style='mso-pagination:lines-together'><span lang=EN-US>Driver
+verifier settings can be retrieved from the system by using the <b>SysQueryDriverVerifierSettings</b>
+routine. The settings that are retrieved can be either the current operational
+settings (i.e., what the system is using <b style='mso-bidi-font-weight:normal'>now</b>)
+or the persistent settings (i.e., what is stored in the registry and will
+therefore be effective upon the next reboot).</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysQueryDriverVerifierSettings</b>(<br>
+<span style='mso-tab-count:1'>            </span>OUT
+PSX_DRIVER_VERIFIER_SETTING <i>Settings</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>BufferLength</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT LPDWORD <i>SettingCount</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>Flags</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Settings</span></i><span lang=EN-US> — Points to a buffer which is
+filled on output with an array of <a href="#DV_SETTING">structures</a>
+describing the current or persistent driver verifier settings (depending on <i>Flags</i>).</span></p>
+
+<p class=MsoToc4><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>BufferLength</span></i><span lang=EN-US> — Supplies the length in
+bytes of the buffer pointed to by <i>Settings</i>.</span></p>
+
+<p class=MsoToc4><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>SettingCount</span></i><span lang=EN-US> — If the routine completes
+successfully, receives a count of the number of SX_DRIVER_VERIFIER_SETTING
+structures placed into the <i>Settings</i> buffer. If the routine fails and GetLastError
+returns ERROR_MORE_DATA, then the supplied buffer was too small and this value
+contains the required size of the <i>Settings</i> buffer in units of
+SX_DRIVER_VERIFIER_SETTING structures.</span></p>
+
+<p class=MsoToc4><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Flags</span></i><span lang=EN-US> — Supplies flags that refine the
+behavior of this routine.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_DVFLAG_CURRENT_SETTING</span></b><span lang=EN-US> — indicates
+that the current operational settings are to be returned. If this flag is not
+specified, then the persistent (registry) settings are returned.</span></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>A zero value
+indicates failure and a non-zero value indicates success. In the failure case,
+GetLastError can be called to get extended error information.<br>
+ERROR_MORE_DATA — the supplied buffer was too small. As much data as would fit
+was returned and <i>SettingCount</i> received the required size of the buffer.</span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449522"><![if !supportLists]><span lang=EN-US>3.3<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Setting Driver Verifier Settings</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>The driver verifier can be controlled with
+the <b>SysSetDriverVerifierSettings</b> routine. The settings passed to this
+routine completely replace the existing settings; it is not possible to add or
+remove individual drivers. The settings that can be controlled are the current
+operational settings (i.e., dynamic changes) or the persistent settings (i.e.,
+changes effective upon reboot).</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Note: in Windows 2000, only persistent
+settings can be altered; altering the current settings is not supported.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysSetDriverVerifierSettings</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN PSX_DRIVER_VERIFIER_SETTING
+<i>Settings</i>,<span style='mso-tab-count:1'>    </span>OPTIONAL<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>SettingCount</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>Flags</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT BOOL *<i>RebootRequired</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Settings</span></i><span lang=EN-US> — Points to a buffer which
+supplies the <a href="#DV_SETTING">settings</a> to be applied, either
+immediately or upon next reboot (depending on <i>Flags</i>). [Note: in Windows
+2000, only the persistent settings can be set with this routine.] If the first
+setting’s driver name is ‘*’ then <i>SettingCount</i> must be 1 and the driver
+verifier is enabled for all drivers in the system at the level specified by the
+Features field of the zeroth (and only) element in the <i>Settings</i> array.
+If <i>Settings</i> is not specified, then <i>SettingCount</i> must be 0 and the
+driver verifier is completely shut off and all settings are deleted.</span></p>
+
+<p class=MsoToc4><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>SettingCount</span></i><span lang=EN-US> — Supplies the number of
+SX_DRIVER_VERIFIER_SETTING structures in the buffer pointed to by <i>Settings</i>.
+[Note: In Windows 2000, the Features field of each setting in the <i>Settings</i>
+array <b style='mso-bidi-font-weight:normal'>must</b> be exactly the same or
+the routine fails, as Windows 2000’s driver verifier does not support
+per-driver verification settings.]</span></p>
+
+<p class=MsoToc4><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Flags</span></i><span lang=EN-US> — Supplies flags that refine the
+behavior of this routine.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_DVFLAG_CURRENT_SETTING</span></b><span lang=EN-US> — indicates
+that the current operational settings are to be altered. If this flag is not
+specified, then the persistent (registry) settings are altered. [Note: in
+Windows 2000 this flag is not supported and must not be set, or the routine
+fails and GetLastError returns <b>ERROR_INVALID_FUNCTION</b>.]</span></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc4><i><span lang=EN-US>RebootRequired</span></i><span lang=EN-US>
+— If the routine is successful, on output receives a flag indicating whether a
+reboot is required for the changes to take effect. [Note: on Windows 2000 this
+flag will always be set.]</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>A zero value
+indicates failure and a non-zero value indicates success. In the failure case,
+GetLastError can be called to get extended error information. Upon success, the
+caller should check the <i>RebootRequired</i> value to determine if the system
+must be rebooted for the changes to take effect.<br style='mso-special-character:
+line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]></span><span lang=EN-US style='font-size:10.0pt;color:#333333'><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449523"><![if !supportLists]><span lang=EN-US>3.4<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Getting Global Verification Statistics</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>When enabled for any driver, the driver
+verifier maintains global statistics that are cumulative for all drivers being
+verified. Drivers that are not being verified are not included in the
+statistics. The global statistics can be returned by calling the <b>SysGetDriverVerifierGlobalStatistics</b>
+routine.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysGetDriverVerifierGlobalStatistics</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN OUT
+PSX_DRIVER_VERIFIER_GLOBAL_STATISTICS <i>Statistics</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc4><i><span lang=EN-US>Statistics</span></i><span lang=EN-US> —
+on successful completion, receives the <a href="#DV_GLOBAL_STATISTICS">global
+statistics</a> maintained by the driver verifier. Before calling this routine,
+the caller must set the StructureSize member to the size of the
+SX_DRIVER_VERIFIER_GLOBAL_STATISTICS structure.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>The return value is zero for
+failure or non-zero for success. In the failure case, GetLastError can be
+called to retrieve extended error information.</span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>ERROR_NO_MORE_ITEMS — indicates
+that the driver verifier is not enabled so there are no statistics available.</span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449524"><![if !supportLists]><span lang=EN-US>3.5<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Getting Per Driver Verification Statistics</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>When enabled for a driver, the driver
+verifier maintains some per-driver statistics for it. These statistics can be
+returned by calling the <b>SysGetDriverVerifierPerDriverStatistics</b> routine.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysGetDriverVerifierPerDriverStatistics</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN LPCWSTR <i>DriverName</i>,<span
+style='mso-tab-count:1'>   </span>OPTIONAL<br>
+<span style='mso-tab-count:1'>            </span>IN OUT
+PSX_DRIVER_VERIFIER_PERDRIVER_STATISTICS <i>Statistics</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>BufferLength</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT LPDWORD <i>DriverCount</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>DriverName</span></i><span lang=EN-US> — if specified, supplies the
+name of the driver whose statistics are desired. This should be the base name
+and extension only, i.e., <i>foo.sys</i>. If not specified, per-driver
+statistics for all drivers currently being verified are returned.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc4><i><span lang=EN-US>Statistics</span></i><span lang=EN-US> —
+Points to a buffer which, upon successful completion, receives the <a
+href="#DV_PERDRIVER_STATISTICS">statistics</a> maintained by the driver
+verifier for the specified driver or all drivers (depending on <i>DriverName</i>).
+Before calling this routine, the caller must set the StructureSize member of
+the zeroth element in this array to the size of the
+SX_DRIVER_VERIFIER_PERDRIVER_STATISTICS structure.</span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>BufferLength</span></i><span lang=EN-US> — supplies the length in
+bytes of the buffer pointed to by <i>Statistics</i>. If this is zero then <i>Statistics</i><span
+style='mso-bidi-font-style:italic'> is ignored.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US style='mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i
+style='mso-bidi-font-style:normal'><span lang=EN-US>DriverCount</span></i><span
+lang=EN-US style='mso-bidi-font-style:italic'> — receives the number of
+SX_DRIVER_VERIFIER_DRIVER_STATISTICS structures that were written into the </span><i
+style='mso-bidi-font-style:normal'><span lang=EN-US>Statistics</span></i><span
+lang=EN-US style='mso-bidi-font-style:italic'> buffer. If the routine fails and
+GetLastError returns ERROR_MORE_DATA, then the buffer was filled to the extent
+possible and this value indicates the required size of the buffer.<o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>The return value is zero for
+failure or non-zero for success. In the failure case, GetLastError can be
+called to retrieve extended error information.<br>
+ERROR_NO_MORE_ITEMS — indicates that the driver verifier is not enabled so there
+are no statistics available.<br>
+ERROR_MORE_DATA — indicates that the supplied buffer was not large enough. The
+caller can check the <i>DriverCount</i> value to determine the required buffer
+size.</span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h1><a name="_Toc465449525"></a><a name="_Process_Statistics"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449525'><span lang=EN-US>4.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449525'><span
+lang=EN-US>Process Statistics</span></span></h1>
+
+<p class=MsoNormal><span lang=EN-US>The DLL provides a routine for querying
+process statistics for running processes. The name of the routine is <b>SysGetProcessStatistics</b>.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449526"></a><a name="_Data_Structure"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449526'><span lang=EN-US>4.1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449526'><span
+lang=EN-US>Data Structure</span></span></h2>
+
+<p class=MsoNormal><span lang=EN-US>Process statistics are returned in the
+following data structure.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>typedef struct
+_SX_PROCESS_STATISTICS {<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>StructureSize</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>NextEntryOffset</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>CreateTime</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>UserTime</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>KernelTime</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>ReadOperationCount</i>; <br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>WriteOperationCount</i>; <br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>OtherOperationCount</i>; <br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>ReadTransferCount</i>; <br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>WriteTransferCount</i>; <br>
+<span style="mso-spacerun: yes">    </span>DWORD64 <i>OtherTransferCount</i>; <br>
+<span style="mso-spacerun: yes">    </span>ULONG_PTR <i>UniqueProcessId</i>;<br>
+<span style="mso-spacerun: yes">    </span>ULONG_PTR <i>InheritedFromUniqueProcessId</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>PeakVirtualSize</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>VirtualSize</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>QuotaPeakPagedPoolUsage</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>QuotaPagedPoolUsage</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>QuotaPeakNonPagedPoolUsage</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>QuotaNonPagedPoolUsage</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>PagefileUsage</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>PeakPagefileUsage</i>;<br>
+<span style="mso-spacerun: yes">    </span>SIZE_T <i>PrivatePageCount</i>;<br>
+<span style="mso-spacerun: yes">    </span>LPWSTR <i>ImageName</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>NumberOfThreads</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>SessionId</i>;<br>
+<span style="mso-spacerun: yes">  </span><span style="mso-spacerun:
+yes">  </span>LONG <i>BasePriority</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>HandleCount</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>PageFaultCount</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>PeakWorkingSetSize</i>;<br>
+<span style="mso-spacerun: yes">    </span>DWORD <i>WorkingSetSize</i>;<br>
+} <b>SX_PROCESS_STATISTICS</b>, *<b>PSX_PROCESS_STATISTICS</b>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Most fields are self-explanatory; notes
+about certain fields follow.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>StructureSize</span></i><span lang=EN-US> — prior to calling <b>SysGetProcessStatistics</b>,
+the caller must fill in the first element in the output buffer with the
+expected size of a statistics structure (i.e., sizeof(SX_PROCESS_STATISTICS).
+This is used as a versioning mechanism. </span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>NextEntryOffset</span></i><span lang=EN-US> — supplies the offset in
+bytes from the start of a structure to the start of the next one in the buffer.
+Callers MUST use this offset to move through the returned structures. The last
+one in the buffer will have a <i>NextEntryOffset</i> of 0.</span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>Xxx<i>OperationCount</i>,
+Xxx<i>TransferCount</i> — these six fields will always be zero on NT4.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><i><span lang=EN-US>ImageName</span></i><span
+lang=EN-US> — will point somewhere within the buffer supplied by the caller.</span></p>
+
+<p class=MsoToc1><span lang=EN-US><span style="mso-spacerun: yes"> </span></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Note that when returned to the caller,
+structures will be aligned to SIZE_T-byte boundaries.</span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449527"><![if !supportLists]><span lang=EN-US>4.2<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Querying Process Statistics</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>The <b>SysGetProcessStatistics</b> routine
+can be used to retrieve system information about running processes. The caller
+can specify matching criteria, which can be either a process id or an image
+name, to narrow the set of processes whose statistics are to be retrieved.
+Statistics are returned into a caller-supplied buffer.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysGetProcessStatistics</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN LPCWSTR <i>ProcessImageName</i>,
+OPTIONAL<br>
+<span style='mso-tab-count:1'>            </span>IN ULONG_PTR <i>ProcessId</i>,
+OPTIONAL<br>
+<span style='mso-tab-count:1'>            </span>IN OUT PSX_PROCESS_STATISTICS <i>Statistics</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>BufferLength</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT LPDWORD <i>ProcessCount</i>,<i><br>
+<span style='mso-tab-count:1'>            </span></i>OUT LPDWORD <i>BytesReturned</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ProcessImageName</span></i><span lang=EN-US> — if specified,
+supplies the image name of the process(es) whose statistics are desired (all
+processes with this image name are returned). This should be the base name and
+extension only, i.e., <i>cmd.exe</i>. Only one of <i>ProcessImageName</i> and <i>ProcessId</i>
+may be specified or the routine fails. If neither is specified, statistics for
+all processes are returned.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ProcessId</span></i><span lang=EN-US> — if specified, supplies the
+process id of the process whose statistics are desired. Note that at most one
+process will be returned in this case. Only one of <i>ProcessImageName</i> and <i>ProcessId</i>
+may be specified or the routine fails. If neither is specified, statistics for
+all processes are returned.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc4><i><span lang=EN-US>Statistics</span></i><span lang=EN-US> —
+Points to a buffer which, upon successful completion, receives the <a
+href="#_Data_Structure">statistics</a> maintained by the system for the
+specified processes (depending on <i>ProcessImageName</i> and <i>ProcessId</i>).
+Before calling this routine, the caller must set the StructureSize member of
+the zeroth element in this array to the size of the SX_PROCESS_STATISTICS
+structure.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>BufferLength</span></i><span lang=EN-US> — supplies the length of
+the buffer pointed to by <i>Statistics</i>, in bytes. If this is zero then <i>Statistics</i><span
+style='mso-bidi-font-style:italic'> is ignored.<o:p></o:p></span></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US style='mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i
+style='mso-bidi-font-style:normal'><span lang=EN-US>ProcessCount</span></i><span
+lang=EN-US style='mso-bidi-font-style:italic'> — receives the number of
+processes that matched the criteria specified by </span><i style='mso-bidi-font-style:
+normal'><span lang=EN-US>ProcessImageName</span></i><span lang=EN-US
+style='mso-bidi-font-style:italic'> and </span><i style='mso-bidi-font-style:
+normal'><span lang=EN-US>ProcessId</span></i><span lang=EN-US style='mso-bidi-font-style:
+italic'>. Note that zero is a valid return value. This value is valid if the
+routine returns TRUE, or if it returns FALSE and GetLastError returns
+ERROR_MORE_DATA.<o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US style='mso-bidi-font-style:italic'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i
+style='mso-bidi-font-style:normal'><span lang=EN-US>BytesReturned</span></i><span
+lang=EN-US style='mso-bidi-font-style:italic'> — receives the number of bytes
+structures that were written into the </span><i style='mso-bidi-font-style:
+normal'><span lang=EN-US>Statistics</span></i><span lang=EN-US
+style='mso-bidi-font-style:italic'> buffer. Note that zero is a valid return
+value. If the routine fails and GetLastError returns ERROR_MORE_DATA, then the
+buffer was filled to the extent possible and this value indicates the required
+size of the buffer.<o:p></o:p></span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US>The return value is zero for
+failure or non-zero for success. In the failure case, GetLastError can be
+called to retrieve extended error information.<br>
+ERROR_MORE_DATA — indicates that the supplied buffer was not large enough. The
+caller can check the <i>BytesReturned</i> value to determine the required
+buffer size.</span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h1><a name="_Toc465449528"></a><a name="_Handle_and_Object"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449528'><span lang=EN-US>5.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449528'><span
+lang=EN-US>Handle and Object Type Information</span></span></h1>
+
+<p class=MsoNormal><span lang=EN-US>The DLL provides routines to query
+information about open handles (or, more precisely, the data from handle table
+entries) and system object types.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SysGetHandlesInfoForProcess</span></b><span lang=EN-US> — retrieve
+information about handles currently in the handle table for a particular
+process</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SysGetHandlesInfoForObjectType</span></b><span lang=EN-US> —
+retrieve information about all handles in the system that represent an object
+of a given type</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SysGetObjectTypeInfo</span></b><span lang=EN-US> — retrieve
+information about a particular object type</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc1><span lang=EN-US>The sections that follow describe the
+routines in greater detail.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449529"><![if !supportLists]><span lang=EN-US>5.1<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Data Structures</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>This section describes the data structures
+used by the handle and object type information routines in the DLL.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>Handle information is returned in the
+following data structure.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;mso-pagination:lines-together'><span
+lang=EN-US>typedef struct _SX_HANDLE_INFO {<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>StructureSize</i>;<br>
+<span style='mso-tab-count:1'>            </span>ULONG_PTR <i>HandleValue</i>;<br>
+<span style='mso-tab-count:1'>            </span>ULONG_PTR <i>ProcessId</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>GrantedAccess</i>;<br>
+<span style='mso-tab-count:1'>            </span><b>HandleAttributes</b> <i>Attributes</i>;<br>
+<span style='mso-tab-count:1'>            </span>LONG <i>ObjectTypeIndex</i>;<br>
+} <b>SX_HANDLE_INFO</b>, *<b>PSX_HANDLE_INFO</b>;</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>StructureSize</span></i><span lang=EN-US> — the size of this
+structure in bytes.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleValue</span></i><span lang=EN-US> — the numeric value of the
+handle.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ProcessId</span></i><span lang=EN-US> — the unique process id of the
+process in which the handle is open.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>GrantedAccess</span></i><span lang=EN-US> — a bitmask indicating the
+access permitted through the handle.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Attributes</span></i><span lang=EN-US> — a bitfield indicating
+various properties of the handle set when it was opened. Besides the values in
+the enumerated type, others are possible; the routines in the DLL do not filter
+the attributes returned by the underlying NT system API.<br>
+<br>
+typedef enum {<br>
+<span style='mso-tab-count:1'>            </span><b style='mso-bidi-font-weight:
+normal'>HaAttributeInherit </b>= 2,<br>
+<span style='mso-tab-count:1'>            </span><b style='mso-bidi-font-weight:
+normal'>HaAttributePerman<span style='mso-bidi-font-weight:bold'>ent</span></b>
+= 16,<br>
+<span style='mso-tab-count:1'>            </span><b style='mso-bidi-font-weight:
+normal'>HaAttributeExclusi<span style='mso-bidi-font-weight:bold'>ve</span></b>
+= 32,<br>
+<span style='mso-tab-count:1'>            </span><b style='mso-bidi-font-weight:
+normal'>HaAttributeCaseIns<span style='mso-bidi-font-weight:bold'>ensitive</span></b>
+= 64,<br>
+<span style='mso-tab-count:1'>            </span><b style='mso-bidi-font-weight:
+normal'>HaAttributeOpenIf</b> = 128<br>
+} <b>HandleAttributes</b>;</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeIndex</span></i><span lang=EN-US> — a value which indexes
+an array of object type structures. This is used with the <b><a
+href="#_Querying_Handle_Information">SysGetHandlesInfoForProcess</a></b>
+routine and is fully described there. Note: this is <b><i>not</i></b> the same
+as the <i>ObjectTypeIndex</i> maintained by the system in handle table entries.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc1><span lang=EN-US>Object type information is returned in the
+following data structure.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>typedef struct
+_SX_OBJECT_TYPE_INFO {<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>StructureSize</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>ObjectCount</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>HandleCount</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>InvalidAttributes</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>ValidAccessMask</i>;<br>
+<span style='mso-tab-count:1'>            </span>GENERIC_MAPPING <i>GenericMapping</i>;<br>
+<span style='mso-tab-count:1'>            </span>DWORD <i>Flags</i>;<br>
+<span style='mso-tab-count:1'>            </span>WCHAR <i>ObjectTypeName</i>[SX_MAX_OBJECT_TYPE_NAME];<br>
+} <b>SX_OBJECT_TYPE_INFO</b>, *<b>PSX_OBJECT_TYPE_INFO</b>;</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>StructureSize</span></i><span lang=EN-US> — the size of this
+structure in bytes.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectCount</span></i><span lang=EN-US> — the number of objects of
+this type currently in existence system-wide.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleCount</span></i><span lang=EN-US> — the number of handles
+currently open to objects of this type.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>InvalidAttributes</span></i><span lang=EN-US> — a mask indicating
+which values in the <b>HandleAttributes</b> enum are not allowed for handles
+opened to objects of this type.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ValidAccessMask</span></i><span lang=EN-US> — a mask supplying legal
+access types for handles opened to objects of this type.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>GenericMapping</span></i><span lang=EN-US> — maps GENERIC_XXX access
+values to type-specific access values.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Flags </span></i><span lang=EN-US><span style="mso-spacerun:
+yes"> </span>— miscellaneous information about the object type.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc7><b><span lang=EN-US>SX_OTFLAG_SECURITY_REQUIRED</span></b><span
+lang=EN-US> — indicates that security checks are performed when an attempt is
+made to open an object of this type.</span></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_OTFLAG_WAITABLE</span></b><span lang=EN-US> — indicates that
+objects of this type can be waited on.</span></p>
+
+<p class=MsoNormal style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_OTFLAG_PAGED_POOL</span></b><span lang=EN-US> — indicates that
+objects of this type will be placed in paged pool. If this flag is not set then
+objects of this type are in nonpaged pool.</span></p>
+
+<p class=MsoToc4><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeName</span></i><span lang=EN-US> — supplies the class/name
+for this type of object. Note that the system does not impose any practical
+limits on the length of this name; empirical observations indicate that these
+names are not generally too long and therefore for convenience an arbitrary
+limit is imposed in this structure. <b>SX_MAX_OBJECT_TYPE_NAME</b> is currently
+defined as 64 characters.</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449530"></a><a name="_Querying_Handle_Information"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449530'><span lang=EN-US>5.2<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449530'><span
+lang=EN-US>Querying Handle Information By Process</span></span></h2>
+
+<p class=MsoNormal><span lang=EN-US>The <b>SysGetHandlesInfoForProcess</b>
+routine can be used to retrieve a list of the handles currently open in a
+particular process. This includes information about the handles, and optionally
+about their associated object types. Note, however, that retrieving information
+about the object types significantly impacts the performance of this routine.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='mso-pagination:lines-together'><span
+lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysGetHandlesInfoForProcess</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN ULONG_PTR <i>ProcessId</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN OUT PSX_HANDLE_INFO <i>HandleInfo</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>HandleInfoBufferLength</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT LPDWORD <i>HandleCount</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN OUT PSX_OBJECT_TYPE_INFO <i>ObjectTypeInfo</i>,
+OPTIONAL<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>ObjectTypeInfoBufferLength</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT LPDWORD <i>ObjectTypeCount</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ProcessId</span></i><span lang=EN-US> — supplies the unique process
+id for the process about whose handles information is to be returned.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleInfo</span></i><span lang=EN-US> — receives information about
+the handles for the specified process. On input, the caller must set the <i>StructureSize</i>
+member of the zeroth member in this buffer to sizeof(SX_HANDLE_INFO) or the
+routine fails. If <i>HandleInfoBufferLength</i> is 0 then this parameter is
+ignored.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleInfoBufferLength</span></i><span lang=EN-US> — supplies the
+length of the buffer pointed to by <i>HandleInfo</i>, in bytes. If the
+information to be returned is too big to fit in this buffer, the routine
+returns FALSE and GetLastError returns ERROR_MORE_DATA. As much data as will
+fit is placed in <i>HandleInfo</i> in this case; the caller can check the <i>HandleCount</i>
+for the required size to get all the data.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleCount </span></i><span lang=EN-US>— receives the number of
+SX_HANDLE_INFO structures placed into the <i>HandleInfo</i> buffer. If the
+routine fails and GetLastError returns ERROR_MORE_DATA, this value is the
+number of SX_HANDLE_INFO structures that would be returned if the buffer were
+large enough.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeInfo</span></i><span lang=EN-US> — optionally receives
+information about the object types represented by the handles whose information
+is returned in <i>HandleInfo</i>. On input, the caller must set the <i>StructureSize</i>
+member of the zeroth member in this buffer to sizeof(SX_OBJECT_TYPE_INFO) or
+the routine fails. The <i>ObjectTypeIndex</i> member of each SX_HANDLE_INFO
+structure returned in the <i>HandleInfo</i> buffer is an index into the array
+that the routine places into the buffer pointed to by this parameter. If this
+buffer is too small, one or more <i>ObjectTypeIndex</i> values could be –1 to
+indicate that there is no associated object type record available. This value
+is ignored if <i>ObjectTypeInfoBufferLength</i> is 0.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeInfoBufferLength</span></i><span lang=EN-US> — <i><span
+style="mso-spacerun: yes"> </span></i>supplies the size in bytes of the buffer
+pointed to by the <i>ObjectTypeInfo</i> parameter. If the buffer is too small,
+the routine returns FALSE and GetLastError returns ERROR_MORE_DATA. In this
+case the caller can check the <i>ObjectTypeCount</i> value to get the required
+size.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeCount</span></i><span lang=EN-US> — receives the number of
+SX_OBJECT_TYPE_INFO structures placed in the buffer pointed to by the <i>ObjectTypeInfo</i>
+parameter. If the routine fails and GetLastError returns ERROR_MORE_DATA, this
+value is the number of object types that would be returned if the buffer were
+large enough.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>The return value
+is a boolean value indicating whether the routine succeeded or failed. In the
+failure case, GetLastError can be called to retrieve extended error
+information.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>ERROR_MORE_DATA
+— either the <i>HandleInfo</i> or the <i>ObjectTypeInfo</i> buffer is too
+small.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>ERROR_FILE_NOT_FOUND
+— the given process id is invalid.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449531"><![if !supportLists]><span lang=EN-US>5.3<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Querying Handle Information By Object Type</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>The <b>SysGetHandlesInfoForObjectType</b>
+routine can he used to retrieve a list of the handles of a particular object
+type currently open system-wide (i.e., in all processes). Information about the
+object type is also retrieved.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='mso-pagination:lines-together'><span
+lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysGetHandlesInfoForObjectType</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN LPCWSTR <i>TypeName</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN OUT PSX_HANDLE_INFO <i>HandleInfo</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>HandleInfoBufferLength</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT LPDWORD <i>HandleCount</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN OUT PSX_OBJECT_TYPE_INFO <i>ObjectTypeInfo</i>
+OPTIONAL<br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>TypeName</span></i><span lang=EN-US> — supplies the name of the type
+whose handles information is to be returned.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleInfo</span></i><span lang=EN-US> — receives information about
+the handles for the specified object type. On input, the caller must set the <i>StructureSize</i>
+member of the zeroth member in this buffer to sizeof(SX_HANDLE_INFO) or the
+routine fails. If <i>HandleInfoBufferLength</i> is 0 then this parameter is
+ignored. <br>
+Note that The <i>ObjectTypeIndex</i> member of each returned structure will be
+set to 0.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleInfoBufferLength</span></i><span lang=EN-US> — supplies the
+length of the buffer pointed to by <i>HandleInfo</i>, in bytes. If the
+information to be returned is too big to fit in this buffer, the routine
+returns FALSE and GetLastError returns ERROR_MORE_DATA. As much data as will
+fit is placed in <i>HandleInfo</i> in this case; the caller can check the <i>HandleCount</i>
+for the required size to get all the data.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>HandleCount </span></i><span lang=EN-US>— receives the number of
+SX_HANDLE_INFO structures placed into the <i>HandleInfo</i> buffer. If the
+routine fails and GetLastError returns ERROR_MORE_DATA, this value is the
+number of SX_HANDLE_INFO structures that would be returned if the buffer were
+large enough.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeInfo</span></i><span lang=EN-US> — optionally receives
+information about the object type represented by the given type name. On input,
+the caller must set the <i>StructureSize</i> member to
+sizeof(SX_OBJECT_TYPE_INFO) or the routine fails.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>The return value
+is a boolean value indicating whether the routine succeeded or failed. In the
+failure case, GetLastError can be called to retrieve extended error
+information.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>ERROR_MORE_DATA
+— either the <i>HandleInfo</i> buffer is too small.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>ERROR_INVALID_NAME
+— the given type name is invalid.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449532"><![if !supportLists]><span lang=EN-US>5.4<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Querying Object Type Information</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>The <b>SysGetObjectTypeInfo</b> routine can
+be used to retrieve information about a particular object type, or about all
+object types currently defined in the system.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='mso-pagination:lines-together'><span
+lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysGetObjectTypeInfo</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN LPCWSTR <i>TypeName</i>,
+OPTIONAL<br>
+<span style='mso-tab-count:1'>            </span>IN OUT PSX_OBJECT_TYPE_INFO <i>ObjectTypeInfo</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>BufferLength</i>,<br>
+<span style='mso-tab-count:1'>            </span>OUT LPDWORD <i>ObjectTypeCount</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>TypeName</span></i><span lang=EN-US> — supplies the name of the
+system object type whose information is to be returned. If not supplied,
+information about all object types in the system is retrieved.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeInfo</span></i><span lang=EN-US> — receives information
+about the specified object type(s). On input, the caller must set the <i>StructureSize</i>
+member of the zeroth member in this buffer to sizeof(SX_OBJECT_TYPE_INFO) or
+the routine fails. If <i>BufferLength</i> is 0 then this parameter is ignored.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>BufferLength</span></i><span lang=EN-US> — supplies the length of
+the buffer pointed to by <i>ObjectTypeInfo</i>, in bytes. If the information to
+be returned is too big to fit in this buffer, the routine returns FALSE and
+GetLastError returns ERROR_MORE_DATA. As much data as will fit is placed in <i>ObjectTypeInfo</i>
+in this case; the caller can check the <i>ObjectTypeCount</i> for the required
+size to get all the data.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>ObjectTypeCount </span></i><span lang=EN-US>— receives the number of
+SX_OBJECT_TYPE_INFO structures placed into the <i>ObjectTypeInfo</i> buffer. If
+the routine fails and GetLastError returns ERROR_MORE_DATA, this value is the
+number of SX_OBJECT_TYPE_INFO structures that would be returned if the buffer
+were large enough.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>The return value
+is a boolean value indicating whether the routine succeeded or failed. In the
+failure case, GetLastError can be called to retrieve extended error
+information.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>ERROR_MORE_DATA
+— either the <i>ObjectTypeInfo</i> buffer is too small.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h1><a name="_Toc465449533"></a><a name="_System_GlobalFlags"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449533'><span lang=EN-US>6.<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449533'><span
+lang=EN-US>System GlobalFlags</span></span></h1>
+
+<p class=MsoNormal><span lang=EN-US>The DLL provides routines to query and set
+system GlobalFlags (the bits in the NtGlobalFlags kernel variable that are
+relevant for kernel mode). Either the current operational state or the state
+stored in the registry can be retrieved. Note that these routines do not
+operate on the flags related to user mode.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SysQueryGlobalFlags</span></b><span lang=EN-US> — retrieve system
+GlobalFlags settings</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SysSetGlobalFlags</span></b><span lang=EN-US> — set system
+GlobalFlags settings</span></p>
+
+<p class=MsoNormal style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoToc1><span lang=EN-US>The sections that follow describe the
+routines in greater detail.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449534"></a><a name="_Data_Structures"></a><![if !supportLists]><span
+style='mso-bookmark:_Toc465449534'><span lang=EN-US>6.1<span style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</span></span></span><![endif]><span style='mso-bookmark:_Toc465449534'><span
+lang=EN-US>Data Structures</span></span></h2>
+
+<p class=MsoNormal><span lang=EN-US>The various GlobalFlags bits that are
+relevant for kernel mode are described in an enumerated type. User mode
+GlobalFlags bits are not represented in this enum.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt;mso-pagination:lines-together'><span
+lang=EN-US>typedef enum {<br>
+<span style='mso-tab-count:1'>            </span><b>GflgStopOnException</b> =
+0x00000001,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgShowLdrSnaps</b> =
+0x00000002,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgDebugInitialCommand</b>
+= 0x00000004,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgStopOnHungGui</b> =
+0x00000008,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgPoolEnableTailCheck</b>
+= 0x00000100,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgPoolEnableFreeCheck</b>
+= 0x00000200,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgPoolEnableTagging</b> =
+0x00000400,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgKernelStackTraceDb</b>
+= 0x00002000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgMaintainObjectTypeList</b>
+= 0x00004000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgIgnoreDebugPriv</b> =
+0x00010000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgEnableCsrDebug</b> =
+0x00020000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgEnableKDebugSymbolLoad</b>
+= 0x00040000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgDisablePageKernelStacks</b>
+= 0x00080000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgEnableCloseExceptions</b>
+= 0x00400000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgEnableExceptionLogging</b>
+= 0x00800000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgEnableHandleTypeTagging</b>
+= 0x01000000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgDebugInitialCommandEx</b>
+= 0x04000000,<br>
+<span style='mso-tab-count:1'>            </span><b>GflgDisableDbgPrint</b> =
+0x08000000<br>
+} <b>GlobalFlagsBits</b>;</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US>It is assumed that users of these routines
+understand what these bits represent.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><a name=PerVersionGlobalFlags></a><span lang=EN-US>Some of
+these bits are relevant only on particular versions of Windows NT.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal><span lang=EN-US><span style='mso-tab-count:1'>            </span><b>NT4
+only</b>: GflgPoolEnableTailCheck, GflgPoolEnableFreeCheck, GflgIgnoreDebugPriv</span></p>
+
+<p class=MsoToc1><span lang=EN-US><span style='mso-tab-count:1'>            </span><b>Windows
+2000 only</b>: GflgDisableDbgPrint</span></p>
+
+<p class=MsoToc1><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449535"><![if !supportLists]><span lang=EN-US>6.2<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Querying GlobalFlags</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>The <b>SysQueryGlobalFlags</b> routine can
+be used to retrieve the current (the current value of the NtGlobalFlags kernel
+variable) or persistent (stored in the registry for use at next reboot) system
+GlobalFlags.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='mso-pagination:lines-together'><span
+lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysQueryGlobalFlags</b>(<br>
+<span style='mso-tab-count:1'>            </span>OUT PDWORD64 <i>GlobalFlags</i>,
+<br>
+<span style='mso-tab-count:1'>            </span>IN LPVOID <i>Reserved</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>Flags</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>GlobalFlags </span></i><span lang=EN-US><span style="mso-spacerun:
+yes"> </span>— upon success, receives the GlobalFlags. Note that user mode
+system GlobalFlags will never be set in this value, nor will bits that are for
+the running version of Windows NT, as described <a href="#PerVersionGlobalFlags">above</a>.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Reserved</span></i><span lang=EN-US> — must be 0.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Flags</span></i><span lang=EN-US> — supplies a set of values that
+control the behavior of this routine.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_GFLAG_CURRENT_SETTING</span></b><span lang=EN-US> — indicates
+that the current value of the NtGlobalFlags kernel variable is to returned.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_GFLAG_PERSISTENT_SETTING</span></b><span lang=EN-US> — indicates
+that the value stored in the registry (and which will therefore be effective at
+next reboot) is to be returned.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>The return value
+is a boolean value indicating whether the routine succeeded or failed. In the
+failure case, GetLastError can be called to retrieve extended error
+information.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<h2><a name="_Toc465449536"><![if !supportLists]><span lang=EN-US>6.3<span
+style='font:7.0pt "Times New Roman"'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></span><![endif]><span
+lang=EN-US>Setting GlobalFlags</span></a></h2>
+
+<p class=MsoNormal><span lang=EN-US>The <b>SysSetGlobalFlags</b> routine can be
+used to change the state of a subset of the system GlobalFlags. Other system
+GlobalFlags are considered by this routine to be read-only; their states cannot
+be modified with this routine. Some of the modifiable GlobalFlags flags can be
+changed on the fly (requires the caller to have SE_DEBUG privilege) whereas
+others can only be changed in the persistent state stored in the registry for
+use at next reboot (requires administrator access, depending on ACLs applied to
+the registry).</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='mso-pagination:lines-together'><span
+lang=EN-US>BOOL<br>
+APIENTRY<br>
+<b>SysSetGlobalFlags</b>(<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD64 <i>GlobalFlags</i>,
+<br>
+<span style='mso-tab-count:1'>            </span>IN LPVOID <i>Reserved</i>,<br>
+<span style='mso-tab-count:1'>            </span>IN DWORD <i>Flags</i><br>
+<span style='mso-tab-count:1'>            </span>);</span></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent><u><span lang=EN-US>Parameters:<o:p></o:p></span></u></p>
+
+<p class=MsoBodyTextIndent><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>GlobalFlags </span></i><span lang=EN-US><span style="mso-spacerun:
+yes"> </span>— supplies a GlobalFlags value to be applied. This routine will
+only change the state of those GlobalFlags flags that are deemed writeable
+(defined by the <b>SX_GFLAGS_WRITEABLE_MASK</b> in the header file) for the
+current version of the operating system as described <a
+href="#PerVersionGlobalFlags">above</a>. Other GlobalFlags flags are not
+changed.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Reserved</span></i><span lang=EN-US> — must be 0.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><i><span
+lang=EN-US>Flags</span></i><span lang=EN-US> — supplies a set of values that
+control the behavior of this routine.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_GFLAG_CURRENT_SETTING</span></b><span lang=EN-US> — indicates
+that the current value of the NtGlobalFlags kernel variable is to returned. If
+this value is used, then no bit in <i>GlobalFlags</i> can be set if it is not
+included in the <b>SX_GFLAGS_DYNAMIC_MASK</b> define in the header file.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:108.0pt;text-indent:-36.0pt'><b><span
+lang=EN-US>SX_GFLAG_PERSISTENT_SETTING</span></b><span lang=EN-US> — indicates
+that the value stored in the registry (and which will therefore be effective at
+next reboot) is to be returned.</span></p>
+
+<p class=MsoBodyTextIndent style='margin-left:72.0pt;text-indent:-36.0pt'><span
+lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><u><span lang=EN-US>Return Value:<o:p></o:p></span></u></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>The return value
+is a boolean value indicating whether the routine succeeded or failed. In the
+failure case, GetLastError can be called to retrieve extended error
+information.</span></p>
+
+<p class=MsoNormal style='margin-left:36.0pt'><span lang=EN-US>ERROR_INVALID_FUNCTION
+— the SX_GFLAG_CURRENT_SETTING <i>Flag</i> was set, but the <i>GlobalFlags</i>
+value attempted to change a GlobalFlags bit that is not changeable without a
+reboot.</span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+<p class=MsoNormal align=right style='text-align:right'><span lang=EN-US
+style='font-size:10.0pt;color:#333333'>Table of Contents</span><span
+lang=EN-US> <a href="#tableofcontents"><span style='font-family:Symbol;
+mso-ascii-font-family:"Times New Roman";mso-hansi-font-family:"Times New Roman";
+mso-char-type:symbol;mso-symbol-font-family:Symbol'><span style='mso-char-type:
+symbol;mso-symbol-font-family:Symbol'>Ý</span></span></a></span></p>
+
+<p class=MsoNormal><span lang=EN-US><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></span></p>
+
+</div>
+
+</body>
+
+</html>

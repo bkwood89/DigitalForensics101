@@ -1,0 +1,177 @@
+<HTML>
+
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<META http-equiv="Content-Language" content="en-us">
+<META name="GENERATOR" content="Microsoft FrontPage 4.0">
+<META name="ProgId" content="FrontPage.Editor.Document">
+<TITLE>NTFS File Sector Information Utility</TITLE>
+</HEAD>
+
+<BODY>
+
+<H3>NTFS File Sector Information Utility</H3>
+<P>Last Updated: <!--WEBBOT bot="Timestamp" startspan s-type="EDITED"
+s-format="%m/%d/%y" -->12/25/99<!--WEBBOT bot="Timestamp" i-checksum="14033"
+endspan --></P>
+<HR>
+<H2>1. Usage</H2>
+<P>NFI dumps information about an NTFS volume, and optionally determines which
+volume and file contains a particular sector.<BR>
+<SPAN lang="EN-US">Invoking nfi.exe with no arguments shows usage as follows.</SPAN></P>
+<P><B>nfi drive-letter [logical-sector-number]</B></P>
+<BLOCKQUOTE>
+  <P>Drive-letter can be a single character or a character followed by a colon
+  (i.e., C or C: are acceptable).<BR>
+  <BR>
+  Logical-sector-number is a decimal or 0x-prefixed hex number, specifying a
+  sector number relative to the volume<BR>
+  whose drive letter is given by drive-letter. If not specified, then
+  information about every file on the volume is dumped.</P>
+</BLOCKQUOTE>
+<P><B>nfi NT-device-path physical-sector-number</B></P>
+<BLOCKQUOTE>
+  <P>Determines which volume a given physical sector on a drive is within, and
+  then which file on the volume it is in.<BR>
+  <BR>
+  NT-device-path is the NT-style path to a physical device. It must not include
+  a partition specification.<BR>
+  <BR>
+  Physical-sector-number is a decimal or 0x-prefixed hex number, specifying a
+  sector number relative to the physical drive whose device path is given by
+  NT-device-path.</P>
+</BLOCKQUOTE>
+<P><B>nfi full-win32-path</B></P>
+<BLOCKQUOTE>
+  <P>Dumps information about a particular file. full-win32-path must start with
+  a drive letter and a colon.</P>
+</BLOCKQUOTE>
+<H2>2. Examples</H2>
+<OL>
+  <LI>Dump of drive information.<FONT face="Courier"><BR>
+    <BR>
+    D:\work\final&gt;nfi\nfi c: | more<BR>
+    NTFS File Sector Information Utility.<BR>
+    Copyright (C) Microsoft Corporation 1999. All rights reserved.<BR>
+    <BR>
+    <BR>
+    File 0<BR>
+    Master File Table ($Mft)<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $ATTRIBUTE_LIST (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $DATA (nonresident)<BR>
+    logical sectors 36693-36724 (0x8f55-0x8f74)<BR>
+    $BITMAP (nonresident)<BR>
+    logical sectors 36725-36726 (0x8f75-0x8f76)<BR>
+    logical sectors 36797-36802 (0x8fbd-0x8fc2)<BR>
+    <BR>
+    File 1<BR>
+    Master File Table Mirror ($MftMirr)<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $DATA (nonresident)<BR>
+    logical sectors 2059029-2059036 (0x1f6b15-0x1f6b1c)<BR>
+    <BR>
+    File 2<BR>
+    Log File ($LogFile)<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $DATA (nonresident)<BR>
+    logical sectors 2086165-2094356 (0x1fd515-0x1ff514)<BR>
+    <BR>
+    File 3<BR>
+    DASD ($Volume)<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $OBJECT_ID (resident)<BR>
+    -- More --<BR>
+    <BR>
+    </FONT></LI>
+  <LI>Drive letter and logical sector to file mapping.<FONT face="Courier"><BR>
+    <BR>
+    D:\&gt;nfi c: 3014000<BR>
+    NTFS File Sector Information Utility.<BR>
+    Copyright (C) Microsoft Corporation 1999. All rights reserved.<BR>
+    <BR>
+    <BR>
+    ***Logical sector 3014000 (0x2dfd70) on drive C is in file number 204.<BR>
+    \WINNT\system32\NTOSKRNL.EXE<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $SECURITY_DESCRIPTOR (resident)<BR>
+    $DATA (nonresident)<BR>
+    logical sectors 3011038-3011240 (0x2df1de-0x2df2a8)<BR>
+    logical sectors 3013791-3014281 (0x2dfc9f-0x2dfe89)<BR>
+    logical sectors 2992479-2992944 (0x2da95f-0x2dab30)<BR>
+    logical sectors 2986291-2986724 (0x2d9133-0x2d92e4)<BR>
+    logical sectors 3011755-3012046 (0x2df4ab-0x2df5ce)<BR>
+    logical sectors 3012690-3012748 (0x2df852-0x2df88c)</FONT><BR>
+    <BR>
+  </LI>
+  <LI>File to logical sector mapping.<FONT face="Courier"><BR>
+    <BR>
+    D:\&gt;nfi c:\winnt\system32\ntoskrnl.exe<BR>
+    NTFS File Sector Information Utility.<BR>
+    Copyright (C) Microsoft Corporation 1999. All rights reserved.<BR>
+    <BR>
+    \WINNT\system32\NTOSKRNL.EXE<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $SECURITY_DESCRIPTOR (resident)<BR>
+    $DATA (nonresident)<BR>
+    logical sectors 3011038-3011240 (0x2df1de-0x2df2a8)<BR>
+    logical sectors 3013791-3014281 (0x2dfc9f-0x2dfe89)<BR>
+    logical sectors 2992479-2992944 (0x2da95f-0x2dab30)<BR>
+    logical sectors 2986291-2986724 (0x2d9133-0x2d92e4)<BR>
+    logical sectors 3011755-3012046 (0x2df4ab-0x2df5ce)<BR>
+    logical sectors 3012690-3012748 (0x2df852-0x2df88c)</FONT><BR>
+    <BR>
+  </LI>
+  <LI>Windows 2000 device path and physical sector to file mapping (1).<BR>
+    <FONT face="Courier"><BR>
+    D:\&gt;nfi \device\harddisk1\dr1 8000000<BR>
+    NTFS File Sector Information Utility.<BR>
+    Copyright (C) Microsoft Corporation 1999. All rights reserved.<BR>
+    <BR>
+    <BR>
+    ***Physical sector 8000000 (0x7a1200) is in file number 3023 on drive F.<BR>
+    \WINNT50\system32\pifmgr.dll<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $DATA (nonresident)<BR>
+    physical sectors 7999936-8000015 (0x7a11c0-0x7a120f)</FONT><BR>
+    <BR>
+  </LI>
+  <LI>Windows 2000 device path and logical sector to file mapping (2).<BR>
+    <FONT face="Courier"><BR>
+    D:\&gt;nfi \device\harddisk1\dr1 8500000<BR>
+    NTFS File Sector Information Utility.<BR>
+    Copyright (C) Microsoft Corporation 1999. All rights reserved.<BR>
+    <BR>
+    ***Physical sector 8500000 (0x81b320) is not in any partition on
+    \device\harddisk1\dr1,<BR>
+    or \device\harddisk1\dr1 is not a legal device name.<BR>
+    <BR>
+    </FONT></LI>
+  <LI>Windows NT 4.0 device path and logical sector to file mapping.<BR>
+    <BR>
+    <FONT face="Courier">C:\&gt;nfi \device\harddisk0 40000<BR>
+    NTFS File Sector Information Utility.<BR>
+    Copyright (C) Microsoft Corporation 1999. All rights reserved.<BR>
+    <BR>
+    <BR>
+    ***Physical sector 40000 (0x9c40) is in file number 146 on drive C.<BR>
+    \demo\PHASE2~1.PPT<BR>
+    $STANDARD_INFORMATION (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $FILE_NAME (resident)<BR>
+    $SECURITY_DESCRIPTOR (resident)<BR>
+    $DATA (nonresident)<BR>
+    physical sectors 39968-40198 (0x9c20-0x9d06)</FONT></LI>
+</OL>
+<P>&nbsp;</P>
+
+</BODY>
+
+</HTML>
