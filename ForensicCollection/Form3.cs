@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,7 +39,16 @@ namespace ForensicCollection
                 if (File.Exists(toolsRoot + "/NetCat/nc.exe"))
                 {
                     runCommand(command, toolsRoot + "/NetCat/");
-                    update.Text = "Connection Closed. View your output in the 'Evidence' Folder.";
+                    update.Text = "Connection Closed. Parsing Output File.";
+                    update.Refresh();
+                    parseFile();
+                    if (checkBox1.Checked == true)
+                    {
+                        update.Text = "Capture SHA1 for all files.";
+                        update.Refresh();
+                        sha1sumAllFiles(Directory.GetCurrentDirectory() + "/Evidence/");
+                    }
+                    update.Text = "Complete! View output of your commands in the 'Evidence' folder.";
                     update.Refresh();
                 }
                 else
@@ -77,8 +86,7 @@ namespace ForensicCollection
                 MessageBox.Show(ex.Message);
             }
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private void parseFile()
         {
             //make folder at exe location and save txt
             //If folder doesn't exists create it otherwise just access it and save to it
@@ -102,7 +110,8 @@ namespace ForensicCollection
                     counter = counter + 1;
                 }
 
-                else if (line.StartsWith("--BEGIN") || fileContents) {
+                else if (line.StartsWith("--BEGIN") || fileContents)
+                {
                     fileContents = true;
                     if (counter == 0)
                     {
@@ -116,7 +125,7 @@ namespace ForensicCollection
                         file.WriteLine(line);
                         file.Close();
                     }
-                    else if(counter == 2)
+                    else if (counter == 2)
                     {
                         StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "/Evidence/userdump.txt", true);
                         file.WriteLine(line);
@@ -128,7 +137,7 @@ namespace ForensicCollection
                         file.WriteLine(line);
                         file.Close();
                     }
-                    else if(counter == 4)
+                    else if (counter == 4)
                     {
                         StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "/Evidence/netstat_rn.txt", true);
                         file.WriteLine(line);
@@ -140,7 +149,7 @@ namespace ForensicCollection
                         file.WriteLine(line);
                         file.Close();
                     }
-                    else if(counter == 6)
+                    else if (counter == 6)
                     {
                         StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "/Evidence/pslist.txt", true);
                         file.WriteLine(line);
@@ -152,7 +161,7 @@ namespace ForensicCollection
                         file.WriteLine(line);
                         file.Close();
                     }
-                    else if(counter == 8)
+                    else if (counter == 8)
                     {
                         StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "/Evidence/date.txt", true);
                         file.WriteLine(line);
@@ -164,7 +173,7 @@ namespace ForensicCollection
                         file.WriteLine(line);
                         file.Close();
                     }
-                    else if(counter == 10)
+                    else if (counter == 10)
                     {
                         StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "/Evidence/psinfo_h_s_d.txt", true);
                         file.WriteLine(line);
@@ -176,7 +185,7 @@ namespace ForensicCollection
                         file.WriteLine(line);
                         file.Close();
                     }
-                    else if(counter == 12)
+                    else if (counter == 12)
                     {
                         StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "/Evidence/psservice.txt", true);
                         file.WriteLine(line);
@@ -188,7 +197,7 @@ namespace ForensicCollection
                         file.WriteLine(line);
                         file.Close();
                     }
-                    else if(counter == 14)
+                    else if (counter == 14)
                     {
                         StreamWriter file = new System.IO.StreamWriter(Directory.GetCurrentDirectory() + "/Evidence/find.txt", true);
                         file.WriteLine(line);
@@ -205,12 +214,6 @@ namespace ForensicCollection
                 }
 
             }
-
-            if (checkBox1.Checked == true)
-            {
-                sha1sumAllFiles(Directory.GetCurrentDirectory() + "/Evidence/");
-            }
-
         }
 
         private void sha1sumAllFiles(string directory)

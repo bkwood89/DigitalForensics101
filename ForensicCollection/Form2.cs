@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,32 +27,12 @@ namespace ForensicCollection
 
         private void start_Click(object sender, EventArgs e)
         {
-            //toolsListText.Visible = false;
-            //fport.Visible = false;
-            //ntlast.Visible = false;
-            //sysinternals.Visible = false;
-            //oem.Visible = false;
-            //unixutils.Visible = false;
             warningText.Visible = false;
-
-            //labelSpeed.Visible = true;
-            //labelPerc.Visible = true;
-            //labelDownloaded.Visible = true;
-            //progressBar.Visible = true;
             filename.Visible = true;
-
-            //labelSpeed.Refresh();
-            //labelPerc.Refresh();
-            //labelDownloaded.Refresh();
-            //progressBar.Refresh();
             filename.Refresh();
 
             if (FileExistCheck() == true)
             {
-                //labelSpeed.Visible = false;
-                //labelPerc.Visible = false;
-                //labelDownloaded.Visible = false;
-                //progressBar.Visible = false;
                 filename.Visible = false;
             }
             else
@@ -68,10 +48,10 @@ namespace ForensicCollection
                 phase3.Visible = true;
                 phase3.Refresh();
                 MoveAllFiles();
-                
+
                 if (keepFiles.Checked == false)
                 {
-                    Directory.Delete(downloadFolder,true);
+                    Directory.Delete(downloadFolder, true);
                 }
                 else
                 {
@@ -179,7 +159,6 @@ namespace ForensicCollection
                 netcat.Text += "Done.";
                 netcat.Refresh();
             }
-                sw.Stop();
         }
         private void ExtractAllFiles()
         {
@@ -210,13 +189,14 @@ namespace ForensicCollection
                 Directory.CreateDirectory(rawToolsDirectory + "/NetCat");
             }
             filename.Text = "Extracting Files and Setting Up Enviornment...";
+            filename.Refresh();
             fport.Text += "..Extracting";
             fport.Refresh();
-            ZipFile.ExtractToDirectory(downloadFolder + "/fport.zip", downloadFolder+"/");
+            ZipFile.ExtractToDirectory(downloadFolder + "/fport.zip", downloadFolder + "/");
 
             ntlast.Text = "Fport..Extracting";
             ntlast.Refresh();
-            ZipFile.ExtractToDirectory(downloadFolder + "/ntlast30.zip", downloadFolder+"/");
+            ZipFile.ExtractToDirectory(downloadFolder + "/ntlast30.zip", downloadFolder + "/");
 
             oem.Text = "Microsofts OEM Support Tools..Extracting";
             oem.Refresh();
@@ -232,11 +212,15 @@ namespace ForensicCollection
 
             netcat.Text = "NetCat...Extracting";
             netcat.Refresh();
-            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory);
             ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/NetCat/");
-            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/OEM/userdump/");
-            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/SysInternals/");
-            ZipFile.ExtractToDirectory(downloadFolder + "/netcat-win32-1.12.zip", rawToolsDirectory + "/UnixUtils/usr/local/wbin/");
+
+            Version win8version = new Version(6, 2, 9200, 0);
+
+            if (Environment.OSVersion.Platform == PlatformID.Win32NT &&
+                Environment.OSVersion.Version >= win8version)
+            {
+                MessageBox.Show("Windows 8 or newer detected. In order to have these downloaded tools to function correctly you need to set them to Windows XP Service Pack 2 Comptability mode.");
+            }
         }
         private void MoveAllFiles()
         {
@@ -244,8 +228,9 @@ namespace ForensicCollection
             filename.Refresh();
             fport.Text += "..Moving.";
             fport.Refresh();
-            try {
-                if(File.Exists(rawToolsDirectory + "/Fport.exe"))
+            try
+            {
+                if (File.Exists(rawToolsDirectory + "/Fport.exe"))
                 {
                     File.Delete(rawToolsDirectory + "/Fport.exe");
                 }
@@ -262,14 +247,15 @@ namespace ForensicCollection
             fport.Refresh();
 
             ntlast.Text += "..Moving.";
-            try {
+            try
+            {
                 if (File.Exists(rawToolsDirectory + "/NTLast.exe"))
                 {
                     File.Delete(rawToolsDirectory + "/NTLast.exe");
                 }
                 File.Move(downloadFolder + "/NTLast.exe", rawToolsDirectory + "/NTLast.exe");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -278,52 +264,19 @@ namespace ForensicCollection
 
             oem.Text += "..Moving";
             oem.Refresh();
-            //try {
-            //    List<String> oemFiles = Directory.GetFiles(downloadFolder + "/OEM/", "*.*", SearchOption.AllDirectories).ToList();
-            //    foreach (string file in oemFiles)
-            //    {
-            //        FileInfo mFile = new FileInfo(file);
-            //        mFile.MoveTo(rawToolsDirectory + "/OEM/" + mFile.Name);
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+
             oem.Text += "Done.";
             oem.Refresh();
 
             sysinternals.Text += "..Moving.";
             sysinternals.Refresh();
-            //try {
-            //    List<String> sysInternalFiles = Directory.GetFiles(downloadFolder + "/SysInternals/", "*.*", SearchOption.AllDirectories).ToList();
-            //    foreach (string file in sysInternalFiles)
-            //    {
-            //        FileInfo mFile = new FileInfo(file);
-            //        mFile.MoveTo(rawToolsDirectory + "/SysInternals/" + mFile.Name);
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+
             sysinternals.Text += "Done.";
             sysinternals.Refresh();
 
             unixutils.Text += "..Moving.";
             unixutils.Refresh();
-            //try {
-            //    List<String> unixUtilesFiles = Directory.GetFiles(downloadFolder + "/UnixUtils/", "*.*", SearchOption.AllDirectories).ToList();
-            //    foreach (string file in unixUtilesFiles)
-            //    {
-            //        FileInfo mFile = new FileInfo(file);
-            //        mFile.MoveTo(rawToolsDirectory + "/UnixUtils/" + mFile.Name);
-            //    }
-            //}
-            //catch(Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message);
-            //}
+
             unixutils.Text += "Done.";
             unixutils.Refresh();
 
@@ -341,7 +294,8 @@ namespace ForensicCollection
                     file.Attributes = FileAttributes.Normal;
                     File.Delete(file.FullName);
                 }
-                catch (Exception ex){
+                catch (Exception ex)
+                {
                     MessageBox.Show(ex.Message);
                 }
         }
@@ -349,10 +303,7 @@ namespace ForensicCollection
         {
             using (webClient = new WebClient())
             {
-                sw.Start();//start the download speed timer
-                //webClient.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
-                //webClient.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
-                // The variable that will be holding the url address (making sure it starts with http://)
+                //sw.Start();//start the download speed timer
                 Uri URL = new Uri(urlAddress);//urlAddress.StartsWith("http://", StringComparison.OrdinalIgnoreCase) ? new Uri(urlAddress) : new Uri("http://" + urlAddress);
                 try
                 {
@@ -365,21 +316,6 @@ namespace ForensicCollection
                 }
             }
         }
-
-        // The event that will fire whenever the progress of the WebClient is changed
-        //private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
-        //{
-        //    // Calculate download speed and output it to labelSpeed.
-        //    labelSpeed.Text = string.Format("{0} kb/s", (e.BytesReceived / 1024d / sw.Elapsed.TotalSeconds).ToString("0.00"));
-        //    // Update the progressbar percentage only when the value is not the same.
-        //    progressBar.Value = e.ProgressPercentage;
-        //    // Show the percentage on our label.
-        //    labelPerc.Text = e.ProgressPercentage.ToString() + "%";
-        //    // Update the label with how much data have been downloaded so far and the total size of the file we are currently downloading
-        //    labelDownloaded.Text = string.Format("{0} MB's / {1} MB's",
-        //        (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
-        //        (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00"));
-        //}
 
         // The event that will trigger when the WebClient is completed
         private void Completed(object sender, AsyncCompletedEventArgs e)
